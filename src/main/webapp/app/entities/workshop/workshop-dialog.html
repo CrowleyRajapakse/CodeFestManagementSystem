@@ -1,0 +1,88 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myWorkshopLabel" data-translate="codeFestManagementSystemV1App.workshop.home.createOrEditLabel">Create or edit a Workshop</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.workshop.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.workshop.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="codeFestManagementSystemV1App.workshop.title" for="field_title">Title</label>
+            <input type="text" class="form-control" name="title" id="field_title"
+                    ng-model="vm.workshop.title"
+                    required/>
+            <div ng-show="editForm.title.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.title.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="codeFestManagementSystemV1App.workshop.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                    ng-model="vm.workshop.description"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="codeFestManagementSystemV1App.workshop.venue" for="field_venue">Venue</label>
+            <input type="text" class="form-control" name="venue" id="field_venue"
+                    ng-model="vm.workshop.venue"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="codeFestManagementSystemV1App.workshop.wcoordinator" for="field_wcoordinator">Wcoordinator</label>
+            <input type="text" class="form-control" name="wcoordinator" id="field_wcoordinator"
+                    ng-model="vm.workshop.wcoordinator"
+                    required/>
+            <div ng-show="editForm.wcoordinator.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.wcoordinator.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="codeFestManagementSystemV1App.workshop.swTime" for="field_swTime">Sw Time</label>
+                <div class="input-group">
+                    <input id="field_swTime" type="text" class="form-control" name="swTime" uib-datepicker-popup="{{dateformat}}" ng-model="vm.workshop.swTime" is-open="vm.datePickerOpenStatus.swTime"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('swTime')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="codeFestManagementSystemV1App.workshop.swDate" for="field_swDate">Sw Date</label>
+                <div class="input-group">
+                    <input id="field_swDate" type="text" class="form-control" name="swDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.workshop.swDate" is-open="vm.datePickerOpenStatus.swDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('swDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+
+        <div class="form-group">
+            <label data-translate="codeFestManagementSystemV1App.workshop.competition" for="field_competition">Competition</label>
+            <select class="form-control" id="field_competition" name="competition" ng-model="vm.workshop.competitionId" ng-options="competition.id as competition.id for competition in vm.competitions"            >
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

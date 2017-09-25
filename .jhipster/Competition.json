@@ -1,0 +1,74 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "event",
+            "otherEntityName": "event",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "competition"
+        },
+        {
+            "relationshipName": "workshop",
+            "otherEntityName": "workshop",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "competition"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "theme",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "venue",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "startDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "endDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "sponsor",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "objective",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "coordinator",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "aboutUs",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170925024051",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "competition",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

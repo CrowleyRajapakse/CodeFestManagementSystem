@@ -1,0 +1,110 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myEventLabel" data-translate="codeFestManagementSystemV1App.event.home.createOrEditLabel">Create or edit a Event</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.event.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.event.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="codeFestManagementSystemV1App.event.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="vm.event.name"
+                    required/>
+            <div ng-show="editForm.name.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.name.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="codeFestManagementSystemV1App.event.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                    ng-model="vm.event.description"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="codeFestManagementSystemV1App.event.venue" for="field_venue">Venue</label>
+            <input type="text" class="form-control" name="venue" id="field_venue"
+                    ng-model="vm.event.venue"
+                    required/>
+            <div ng-show="editForm.venue.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.venue.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="codeFestManagementSystemV1App.event.startDate" for="field_startDate">Start Date</label>
+                <div class="input-group">
+                    <input id="field_startDate" type="text" class="form-control" name="startDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.event.startDate" is-open="vm.datePickerOpenStatus.startDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('startDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="codeFestManagementSystemV1App.event.endDate" for="field_endDate">End Date</label>
+                <div class="input-group">
+                    <input id="field_endDate" type="text" class="form-control" name="endDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.event.endDate" is-open="vm.datePickerOpenStatus.endDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('endDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="codeFestManagementSystemV1App.event.etime" for="field_etime">Etime</label>
+                <div class="input-group">
+                    <input id="field_etime" type="text" class="form-control" name="etime" datetime-picker="{{dateformat}}" ng-model="vm.event.etime" is-open="vm.datePickerOpenStatus.etime"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('etime')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="codeFestManagementSystemV1App.event.ecoordinator" for="field_ecoordinator">Ecoordinator</label>
+            <input type="text" class="form-control" name="ecoordinator" id="field_ecoordinator"
+                    ng-model="vm.event.ecoordinator"
+                    required/>
+            <div ng-show="editForm.ecoordinator.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.ecoordinator.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="codeFestManagementSystemV1App.event.teamCompetitorName" for="field_teamCompetitorName">Team Competitor Name</label>
+            <input type="text" class="form-control" name="teamCompetitorName" id="field_teamCompetitorName"
+                    ng-model="vm.event.teamCompetitorName"
+                    />
+        </div>
+
+        <div class="form-group">
+            <label data-translate="codeFestManagementSystemV1App.event.competition" for="field_competition">Competition</label>
+            <select class="form-control" id="field_competition" name="competition" ng-model="vm.event.competitionId" ng-options="competition.id as competition.id for competition in vm.competitions"            >
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

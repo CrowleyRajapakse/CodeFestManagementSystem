@@ -1,0 +1,49 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "competition",
+            "otherEntityName": "competition",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "venue",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "wcoordinator",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "swTime",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "swDate",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20170925031101",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "workshop",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

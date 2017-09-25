@@ -1,0 +1,59 @@
+
+<div>
+    <h2><span data-translate="codeFestManagementSystemV1App.competition.detail.title">Competition</span> {{vm.competition.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="codeFestManagementSystemV1App.competition.title">Title</span></dt>
+        <dd>
+            <span>{{vm.competition.title}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.competition.theme">Theme</span></dt>
+        <dd>
+            <span>{{vm.competition.theme}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.competition.description">Description</span></dt>
+        <dd>
+            <span>{{vm.competition.description}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.competition.venue">Venue</span></dt>
+        <dd>
+            <span>{{vm.competition.venue}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.competition.startDate">Start Date</span></dt>
+        <dd>
+            <span>{{vm.competition.startDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.competition.endDate">End Date</span></dt>
+        <dd>
+            <span>{{vm.competition.endDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.competition.sponsor">Sponsor</span></dt>
+        <dd>
+            <span>{{vm.competition.sponsor}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.competition.objective">Objective</span></dt>
+        <dd>
+            <span>{{vm.competition.objective}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.competition.coordinator">Coordinator</span></dt>
+        <dd>
+            <span>{{vm.competition.coordinator}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.competition.aboutUs">About Us</span></dt>
+        <dd>
+            <span>{{vm.competition.aboutUs}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="competition-detail.edit({id:vm.competition.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,60 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "competition",
+            "otherEntityName": "competition",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "venue",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "startDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "endDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "etime",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "ecoordinator",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "teamCompetitorName",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170925030452",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "event",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}
