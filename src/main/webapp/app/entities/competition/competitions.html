@@ -54,12 +54,12 @@
                     <td><a ui-sref="competition-detail({id:competition.id})">{{competition.id}}</a></td>
                     <td>{{competition.title}}</td>
                     <td>{{competition.theme}}</td>
-                    <td>{{competition.description}}</td>
+                    <td>{{competition.description | limitTo:50}}</td>
                     <td>{{competition.venue}}</td>
                         <td>{{competition.startDate | date:'mediumDate'}}</td>
                         <td>{{competition.endDate | date:'mediumDate'}}</td>
                     <td>{{competition.sponsor}}</td>
-                    <td>{{competition.objective}}</td>
+                    <td>{{competition.objective | limitTo:50}}</td>
                     <td>{{competition.coordinator}}</td>
                     <td>{{competition.aboutUs}}</td>
                     <td class="text-right">
