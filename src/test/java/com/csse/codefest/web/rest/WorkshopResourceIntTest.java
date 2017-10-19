@@ -5,6 +5,7 @@ import com.csse.codefest.CodeFestManagementSystemV1App;
 import com.csse.codefest.domain.Workshop;
 import com.csse.codefest.repository.WorkshopRepository;
 import com.csse.codefest.service.WorkshopService;
+import com.csse.codefest.repository.search.WorkshopSearchRepository;
 import com.csse.codefest.service.dto.WorkshopDTO;
 import com.csse.codefest.service.mapper.WorkshopMapper;
 import com.csse.codefest.web.rest.errors.ExceptionTranslator;
@@ -70,6 +71,9 @@ public class WorkshopResourceIntTest {
     private WorkshopService workshopService;
 
     @Autowired
+    private WorkshopSearchRepository workshopSearchRepository;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -114,6 +118,7 @@ public class WorkshopResourceIntTest {
 
     @Before
     public void initTest() {
+        workshopSearchRepository.deleteAll();
         workshop = createEntity(em);
     }
 
@@ -139,6 +144,10 @@ public class WorkshopResourceIntTest {
         assertThat(testWorkshop.getWcoordinator()).isEqualTo(DEFAULT_WCOORDINATOR);
         assertThat(testWorkshop.getSwTime()).isEqualTo(DEFAULT_SW_TIME);
         assertThat(testWorkshop.getSwDate()).isEqualTo(DEFAULT_SW_DATE);
+
+        // Validate the Workshop in Elasticsearch
+        Workshop workshopEs = workshopSearchRepository.findOne(testWorkshop.getId());
+        assertThat(workshopEs).isEqualToComparingFieldByField(testWorkshop);
     }
 
     @Test
@@ -250,6 +259,7 @@ public class WorkshopResourceIntTest {
     public void updateWorkshop() throws Exception {
         // Initialize the database
         workshopRepository.saveAndFlush(workshop);
+        workshopSearchRepository.save(workshop);
         int databaseSizeBeforeUpdate = workshopRepository.findAll().size();
 
         // Update the workshop
@@ -278,6 +288,10 @@ public class WorkshopResourceIntTest {
         assertThat(testWorkshop.getWcoordinator()).isEqualTo(UPDATED_WCOORDINATOR);
         assertThat(testWorkshop.getSwTime()).isEqualTo(UPDATED_SW_TIME);
         assertThat(testWorkshop.getSwDate()).isEqualTo(UPDATED_SW_DATE);
+
+        // Validate the Workshop in Elasticsearch
+        Workshop workshopEs = workshopSearchRepository.findOne(testWorkshop.getId());
+        assertThat(workshopEs).isEqualToComparingFieldByField(testWorkshop);
     }
 
     @Test
@@ -304,6 +318,7 @@ public class WorkshopResourceIntTest {
     public void deleteWorkshop() throws Exception {
         // Initialize the database
         workshopRepository.saveAndFlush(workshop);
+        workshopSearchRepository.save(workshop);
         int databaseSizeBeforeDelete = workshopRepository.findAll().size();
 
         // Get the workshop
@@ -311,9 +326,33 @@ public class WorkshopResourceIntTest {
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk());
 
+        // Validate Elasticsearch is empty
+        boolean workshopExistsInEs = workshopSearchRepository.exists(workshop.getId());
+        assertThat(workshopExistsInEs).isFalse();
+
         // Validate the database is empty
         List<Workshop> workshopList = workshopRepository.findAll();
         assertThat(workshopList).hasSize(databaseSizeBeforeDelete - 1);
+    }
+
+    @Test
+    @Transactional
+    public void searchWorkshop() throws Exception {
+        // Initialize the database
+        workshopRepository.saveAndFlush(workshop);
+        workshopSearchRepository.save(workshop);
+
+        // Search the workshop
+        restWorkshopMockMvc.perform(get("/api/_search/workshops?query=id:" + workshop.getId()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(workshop.getId().intValue())))
+            .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE.toString())))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].venue").value(hasItem(DEFAULT_VENUE.toString())))
+            .andExpect(jsonPath("$.[*].wcoordinator").value(hasItem(DEFAULT_WCOORDINATOR.toString())))
+            .andExpect(jsonPath("$.[*].swTime").value(hasItem(DEFAULT_SW_TIME.toString())))
+            .andExpect(jsonPath("$.[*].swDate").value(hasItem(DEFAULT_SW_DATE.toString())));
     }
 
     @Test

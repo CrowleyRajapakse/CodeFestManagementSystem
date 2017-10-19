@@ -3,6 +3,7 @@ package com.csse.codefest.service.impl;
 import com.csse.codefest.service.WorkshopService;
 import com.csse.codefest.domain.Workshop;
 import com.csse.codefest.repository.WorkshopRepository;
+import com.csse.codefest.repository.search.WorkshopSearchRepository;
 import com.csse.codefest.service.dto.WorkshopDTO;
 import com.csse.codefest.service.mapper.WorkshopMapper;
 import org.slf4j.Logger;
@@ -12,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * Service Implementation for managing Workshop.
@@ -26,9 +29,12 @@ public class WorkshopServiceImpl implements WorkshopService{
 
     private final WorkshopMapper workshopMapper;
 
-    public WorkshopServiceImpl(WorkshopRepository workshopRepository, WorkshopMapper workshopMapper) {
+    private final WorkshopSearchRepository workshopSearchRepository;
+
+    public WorkshopServiceImpl(WorkshopRepository workshopRepository, WorkshopMapper workshopMapper, WorkshopSearchRepository workshopSearchRepository) {
         this.workshopRepository = workshopRepository;
         this.workshopMapper = workshopMapper;
+        this.workshopSearchRepository = workshopSearchRepository;
     }
 
     /**
@@ -42,7 +48,9 @@ public class WorkshopServiceImpl implements WorkshopService{
         log.debug("Request to save Workshop : {}", workshopDTO);
         Workshop workshop = workshopMapper.toEntity(workshopDTO);
         workshop = workshopRepository.save(workshop);
-        return workshopMapper.toDto(workshop);
+        WorkshopDTO result = workshopMapper.toDto(workshop);
+        workshopSearchRepository.save(workshop);
+        return result;
     }
 
     /**
@@ -82,5 +90,21 @@ public class WorkshopServiceImpl implements WorkshopService{
     public void delete(Long id) {
         log.debug("Request to delete Workshop : {}", id);
         workshopRepository.delete(id);
+        workshopSearchRepository.delete(id);
+    }
+
+    /**
+     * Search for the workshop corresponding to the query.
+     *
+     *  @param query the query of the search
+     *  @param pageable the pagination information
+     *  @return the list of entities
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Page<WorkshopDTO> search(String query, Pageable pageable) {
+        log.debug("Request to search for a page of Workshops for query {}", query);
+        Page<Workshop> result = workshopSearchRepository.search(queryStringQuery(query), pageable);
+        return result.map(workshopMapper::toDto);
     }
 }

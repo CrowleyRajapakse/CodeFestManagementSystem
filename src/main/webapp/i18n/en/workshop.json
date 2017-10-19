@@ -4,7 +4,8 @@
             "home": {
                 "title": "Workshops",
                 "createLabel": "Create a new Workshop",
-                "createOrEditLabel": "Create or edit a Workshop"
+                "createOrEditLabel": "Create or edit a Workshop",
+                "search": "Search for Workshop"
             },
             "created": "A new Workshop is created with identifier {{ param }}",
             "updated": "A Workshop is updated with identifier {{ param }}",

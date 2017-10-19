@@ -3,6 +3,7 @@ package com.csse.codefest.service.impl;
 import com.csse.codefest.service.CompetitionService;
 import com.csse.codefest.domain.Competition;
 import com.csse.codefest.repository.CompetitionRepository;
+import com.csse.codefest.repository.search.CompetitionSearchRepository;
 import com.csse.codefest.service.dto.CompetitionDTO;
 import com.csse.codefest.service.mapper.CompetitionMapper;
 import org.slf4j.Logger;
@@ -12,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * Service Implementation for managing Competition.
@@ -26,9 +29,12 @@ public class CompetitionServiceImpl implements CompetitionService{
 
     private final CompetitionMapper competitionMapper;
 
-    public CompetitionServiceImpl(CompetitionRepository competitionRepository, CompetitionMapper competitionMapper) {
+    private final CompetitionSearchRepository competitionSearchRepository;
+
+    public CompetitionServiceImpl(CompetitionRepository competitionRepository, CompetitionMapper competitionMapper, CompetitionSearchRepository competitionSearchRepository) {
         this.competitionRepository = competitionRepository;
         this.competitionMapper = competitionMapper;
+        this.competitionSearchRepository = competitionSearchRepository;
     }
 
     /**
@@ -42,7 +48,9 @@ public class CompetitionServiceImpl implements CompetitionService{
         log.debug("Request to save Competition : {}", competitionDTO);
         Competition competition = competitionMapper.toEntity(competitionDTO);
         competition = competitionRepository.save(competition);
-        return competitionMapper.toDto(competition);
+        CompetitionDTO result = competitionMapper.toDto(competition);
+        competitionSearchRepository.save(competition);
+        return result;
     }
 
     /**
@@ -82,5 +90,21 @@ public class CompetitionServiceImpl implements CompetitionService{
     public void delete(Long id) {
         log.debug("Request to delete Competition : {}", id);
         competitionRepository.delete(id);
+        competitionSearchRepository.delete(id);
+    }
+
+    /**
+     * Search for the competition corresponding to the query.
+     *
+     *  @param query the query of the search
+     *  @param pageable the pagination information
+     *  @return the list of entities
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Page<CompetitionDTO> search(String query, Pageable pageable) {
+        log.debug("Request to search for a page of Competitions for query {}", query);
+        Page<Competition> result = competitionSearchRepository.search(queryStringQuery(query), pageable);
+        return result.map(competitionMapper::toDto);
     }
 }

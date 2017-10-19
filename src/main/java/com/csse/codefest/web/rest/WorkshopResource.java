@@ -22,6 +22,9 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
+
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing Workshop.
@@ -124,4 +127,22 @@ public class WorkshopResource {
         workshopService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+    /**
+     * SEARCH  /_search/workshops?query=:query : search for the workshop corresponding
+     * to the query.
+     *
+     * @param query the query of the workshop search
+     * @param pageable the pagination information
+     * @return the result of the search
+     */
+    @GetMapping("/_search/workshops")
+    @Timed
+    public ResponseEntity<List<WorkshopDTO>> searchWorkshops(@RequestParam String query, @ApiParam Pageable pageable) {
+        log.debug("REST request to search for a page of Workshops for query {}", query);
+        Page<WorkshopDTO> page = workshopService.search(query, pageable);
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/workshops");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
 }
