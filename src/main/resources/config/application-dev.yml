@@ -57,9 +57,15 @@ spring:
         protocol: smtp
         tls: true
         properties.mail.smtp:
+<<<<<<< HEAD
         auth: true
         starttls.enable: true
         ssl.trust: smtp.gmail.com
+=======
+                                auth: true
+                                starttls.enable: true
+                                ssl.trust: smtp.gmail.com
+>>>>>>> origin/master
     messages:
         cache-seconds: 1
     thymeleaf:
