@@ -5,6 +5,7 @@ import com.csse.codefest.CodeFestManagementSystemV1App;
 import com.csse.codefest.domain.Event;
 import com.csse.codefest.repository.EventRepository;
 import com.csse.codefest.service.EventService;
+import com.csse.codefest.repository.search.EventSearchRepository;
 import com.csse.codefest.service.dto.EventDTO;
 import com.csse.codefest.service.mapper.EventMapper;
 import com.csse.codefest.web.rest.errors.ExceptionTranslator;
@@ -80,6 +81,9 @@ public class EventResourceIntTest {
     private EventService eventService;
 
     @Autowired
+    private EventSearchRepository eventSearchRepository;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -126,6 +130,7 @@ public class EventResourceIntTest {
 
     @Before
     public void initTest() {
+        eventSearchRepository.deleteAll();
         event = createEntity(em);
     }
 
@@ -153,6 +158,10 @@ public class EventResourceIntTest {
         assertThat(testEvent.getEtime()).isEqualTo(DEFAULT_ETIME);
         assertThat(testEvent.getEcoordinator()).isEqualTo(DEFAULT_ECOORDINATOR);
         assertThat(testEvent.getTeamCompetitorName()).isEqualTo(DEFAULT_TEAM_COMPETITOR_NAME);
+
+        // Validate the Event in Elasticsearch
+        Event eventEs = eventSearchRepository.findOne(testEvent.getId());
+        assertThat(eventEs).isEqualToComparingFieldByField(testEvent);
     }
 
     @Test
@@ -287,6 +296,7 @@ public class EventResourceIntTest {
     public void updateEvent() throws Exception {
         // Initialize the database
         eventRepository.saveAndFlush(event);
+        eventSearchRepository.save(event);
         int databaseSizeBeforeUpdate = eventRepository.findAll().size();
 
         // Update the event
@@ -319,6 +329,10 @@ public class EventResourceIntTest {
         assertThat(testEvent.getEtime()).isEqualTo(UPDATED_ETIME);
         assertThat(testEvent.getEcoordinator()).isEqualTo(UPDATED_ECOORDINATOR);
         assertThat(testEvent.getTeamCompetitorName()).isEqualTo(UPDATED_TEAM_COMPETITOR_NAME);
+
+        // Validate the Event in Elasticsearch
+        Event eventEs = eventSearchRepository.findOne(testEvent.getId());
+        assertThat(eventEs).isEqualToComparingFieldByField(testEvent);
     }
 
     @Test
@@ -345,6 +359,7 @@ public class EventResourceIntTest {
     public void deleteEvent() throws Exception {
         // Initialize the database
         eventRepository.saveAndFlush(event);
+        eventSearchRepository.save(event);
         int databaseSizeBeforeDelete = eventRepository.findAll().size();
 
         // Get the event
@@ -352,9 +367,35 @@ public class EventResourceIntTest {
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk());
 
+        // Validate Elasticsearch is empty
+        boolean eventExistsInEs = eventSearchRepository.exists(event.getId());
+        assertThat(eventExistsInEs).isFalse();
+
         // Validate the database is empty
         List<Event> eventList = eventRepository.findAll();
         assertThat(eventList).hasSize(databaseSizeBeforeDelete - 1);
+    }
+
+    @Test
+    @Transactional
+    public void searchEvent() throws Exception {
+        // Initialize the database
+        eventRepository.saveAndFlush(event);
+        eventSearchRepository.save(event);
+
+        // Search the event
+        restEventMockMvc.perform(get("/api/_search/events?query=id:" + event.getId()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(event.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].venue").value(hasItem(DEFAULT_VENUE.toString())))
+            .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
+            .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())))
+            .andExpect(jsonPath("$.[*].etime").value(hasItem(sameInstant(DEFAULT_ETIME))))
+            .andExpect(jsonPath("$.[*].ecoordinator").value(hasItem(DEFAULT_ECOORDINATOR.toString())))
+            .andExpect(jsonPath("$.[*].teamCompetitorName").value(hasItem(DEFAULT_TEAM_COMPETITOR_NAME.toString())));
     }
 
     @Test

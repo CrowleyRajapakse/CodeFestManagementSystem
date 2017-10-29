@@ -41,11 +41,25 @@ spring:
             hibernate.cache.use_second_level_cache: false
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: true
+    data:
+        elasticsearch:
+            cluster-name:
+            cluster-nodes:
+            properties:
+                path:
+                    logs: build/elasticsearch/log
+                    data: build/elasticsearch/data
     mail:
-        host: localhost
-        port: 25
-        username:
-        password:
+        host: smtp.gmail.com
+        port: 587
+        username: csseproj@gmail.com
+        password: csse@#12
+        protocol: smtp
+        tls: true
+        properties.mail.smtp:
+                                auth: true
+                                starttls.enable: true
+                                ssl.trust: smtp.gmail.com
     messages:
         cache-seconds: 1
     thymeleaf:

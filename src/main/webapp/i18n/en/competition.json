@@ -4,7 +4,8 @@
             "home": {
                 "title": "Competitions",
                 "createLabel": "Create a new Competition",
-                "createOrEditLabel": "Create or edit a Competition"
+                "createOrEditLabel": "Create or edit a Competition",
+                "search": "Search for Competition"
             },
             "created": "A new Competition is created with identifier {{ param }}",
             "updated": "A Competition is updated with identifier {{ param }}",

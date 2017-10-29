@@ -3,6 +3,7 @@ package com.csse.codefest.service.impl;
 import com.csse.codefest.service.EventService;
 import com.csse.codefest.domain.Event;
 import com.csse.codefest.repository.EventRepository;
+import com.csse.codefest.repository.search.EventSearchRepository;
 import com.csse.codefest.service.dto.EventDTO;
 import com.csse.codefest.service.mapper.EventMapper;
 import org.slf4j.Logger;
@@ -12,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * Service Implementation for managing Event.
@@ -26,9 +29,12 @@ public class EventServiceImpl implements EventService{
 
     private final EventMapper eventMapper;
 
-    public EventServiceImpl(EventRepository eventRepository, EventMapper eventMapper) {
+    private final EventSearchRepository eventSearchRepository;
+
+    public EventServiceImpl(EventRepository eventRepository, EventMapper eventMapper, EventSearchRepository eventSearchRepository) {
         this.eventRepository = eventRepository;
         this.eventMapper = eventMapper;
+        this.eventSearchRepository = eventSearchRepository;
     }
 
     /**
@@ -42,7 +48,9 @@ public class EventServiceImpl implements EventService{
         log.debug("Request to save Event : {}", eventDTO);
         Event event = eventMapper.toEntity(eventDTO);
         event = eventRepository.save(event);
-        return eventMapper.toDto(event);
+        EventDTO result = eventMapper.toDto(event);
+        eventSearchRepository.save(event);
+        return result;
     }
 
     /**
@@ -82,5 +90,21 @@ public class EventServiceImpl implements EventService{
     public void delete(Long id) {
         log.debug("Request to delete Event : {}", id);
         eventRepository.delete(id);
+        eventSearchRepository.delete(id);
+    }
+
+    /**
+     * Search for the event corresponding to the query.
+     *
+     *  @param query the query of the search
+     *  @param pageable the pagination information
+     *  @return the list of entities
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Page<EventDTO> search(String query, Pageable pageable) {
+        log.debug("Request to search for a page of Events for query {}", query);
+        Page<Event> result = eventSearchRepository.search(queryStringQuery(query), pageable);
+        return result.map(eventMapper::toDto);
     }
 }

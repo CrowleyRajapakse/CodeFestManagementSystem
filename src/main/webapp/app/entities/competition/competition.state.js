@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/competition?page&sort&search',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_USER','ROLE_LECTURER'],
                 pageTitle: 'codeFestManagementSystemV1App.competition.home.title'
             },
             views: {
@@ -55,7 +55,7 @@
             parent: 'competition',
             url: '/competition/{id}',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_USER','ROLE_LECTURER'],
                 pageTitle: 'codeFestManagementSystemV1App.competition.detail.title'
             },
             views: {
@@ -87,7 +87,7 @@
             parent: 'competition-detail',
             url: '/detail/edit',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_USER','ROLE_LECTURER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -112,7 +112,7 @@
             parent: 'competition',
             url: '/new',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_USER','ROLE_LECTURER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -149,7 +149,7 @@
             parent: 'competition',
             url: '/{id}/edit',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_USER','ROLE_LECTURER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -174,7 +174,7 @@
             parent: 'competition',
             url: '/{id}/delete',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_USER','ROLE_LECTURER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({

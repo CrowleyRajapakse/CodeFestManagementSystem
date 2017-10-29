@@ -1,5 +1,6 @@
 package com.csse.codefest.domain;
 
+import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -13,6 +14,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "event")
+@Document(indexName = "event")
 public class Event implements Serializable {
 
     private static final long serialVersionUID = 1L;

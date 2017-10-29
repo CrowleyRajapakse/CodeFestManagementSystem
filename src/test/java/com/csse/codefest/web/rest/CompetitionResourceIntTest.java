@@ -5,6 +5,7 @@ import com.csse.codefest.CodeFestManagementSystemV1App;
 import com.csse.codefest.domain.Competition;
 import com.csse.codefest.repository.CompetitionRepository;
 import com.csse.codefest.service.CompetitionService;
+import com.csse.codefest.repository.search.CompetitionSearchRepository;
 import com.csse.codefest.service.dto.CompetitionDTO;
 import com.csse.codefest.service.mapper.CompetitionMapper;
 import com.csse.codefest.web.rest.errors.ExceptionTranslator;
@@ -82,6 +83,9 @@ public class CompetitionResourceIntTest {
     private CompetitionService competitionService;
 
     @Autowired
+    private CompetitionSearchRepository competitionSearchRepository;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -130,6 +134,7 @@ public class CompetitionResourceIntTest {
 
     @Before
     public void initTest() {
+        competitionSearchRepository.deleteAll();
         competition = createEntity(em);
     }
 
@@ -159,6 +164,10 @@ public class CompetitionResourceIntTest {
         assertThat(testCompetition.getObjective()).isEqualTo(DEFAULT_OBJECTIVE);
         assertThat(testCompetition.getCoordinator()).isEqualTo(DEFAULT_COORDINATOR);
         assertThat(testCompetition.getAboutUs()).isEqualTo(DEFAULT_ABOUT_US);
+
+        // Validate the Competition in Elasticsearch
+        Competition competitionEs = competitionSearchRepository.findOne(testCompetition.getId());
+        assertThat(competitionEs).isEqualToComparingFieldByField(testCompetition);
     }
 
     @Test
@@ -297,6 +306,7 @@ public class CompetitionResourceIntTest {
     public void updateCompetition() throws Exception {
         // Initialize the database
         competitionRepository.saveAndFlush(competition);
+        competitionSearchRepository.save(competition);
         int databaseSizeBeforeUpdate = competitionRepository.findAll().size();
 
         // Update the competition
@@ -333,6 +343,10 @@ public class CompetitionResourceIntTest {
         assertThat(testCompetition.getObjective()).isEqualTo(UPDATED_OBJECTIVE);
         assertThat(testCompetition.getCoordinator()).isEqualTo(UPDATED_COORDINATOR);
         assertThat(testCompetition.getAboutUs()).isEqualTo(UPDATED_ABOUT_US);
+
+        // Validate the Competition in Elasticsearch
+        Competition competitionEs = competitionSearchRepository.findOne(testCompetition.getId());
+        assertThat(competitionEs).isEqualToComparingFieldByField(testCompetition);
     }
 
     @Test
@@ -359,6 +373,7 @@ public class CompetitionResourceIntTest {
     public void deleteCompetition() throws Exception {
         // Initialize the database
         competitionRepository.saveAndFlush(competition);
+        competitionSearchRepository.save(competition);
         int databaseSizeBeforeDelete = competitionRepository.findAll().size();
 
         // Get the competition
@@ -366,9 +381,37 @@ public class CompetitionResourceIntTest {
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk());
 
+        // Validate Elasticsearch is empty
+        boolean competitionExistsInEs = competitionSearchRepository.exists(competition.getId());
+        assertThat(competitionExistsInEs).isFalse();
+
         // Validate the database is empty
         List<Competition> competitionList = competitionRepository.findAll();
         assertThat(competitionList).hasSize(databaseSizeBeforeDelete - 1);
+    }
+
+    @Test
+    @Transactional
+    public void searchCompetition() throws Exception {
+        // Initialize the database
+        competitionRepository.saveAndFlush(competition);
+        competitionSearchRepository.save(competition);
+
+        // Search the competition
+        restCompetitionMockMvc.perform(get("/api/_search/competitions?query=id:" + competition.getId()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(competition.getId().intValue())))
+            .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE.toString())))
+            .andExpect(jsonPath("$.[*].theme").value(hasItem(DEFAULT_THEME.toString())))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].venue").value(hasItem(DEFAULT_VENUE.toString())))
+            .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
+            .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())))
+            .andExpect(jsonPath("$.[*].sponsor").value(hasItem(DEFAULT_SPONSOR.toString())))
+            .andExpect(jsonPath("$.[*].objective").value(hasItem(DEFAULT_OBJECTIVE.toString())))
+            .andExpect(jsonPath("$.[*].coordinator").value(hasItem(DEFAULT_COORDINATOR.toString())))
+            .andExpect(jsonPath("$.[*].aboutUs").value(hasItem(DEFAULT_ABOUT_US.toString())));
     }
 
     @Test

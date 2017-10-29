@@ -6,6 +6,7 @@ import com.csse.codefest.domain.PersistentToken;
 import com.csse.codefest.domain.User;
 import com.csse.codefest.repository.PersistentTokenRepository;
 import com.csse.codefest.repository.UserRepository;
+import com.csse.codefest.security.AuthoritiesConstants;
 import com.csse.codefest.security.SecurityUtils;
 import com.csse.codefest.service.MailService;
 import com.csse.codefest.service.UserService;
@@ -22,12 +23,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.annotation.Secured;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.*;
+
 
 /**
  * REST controller for managing the current user's account.
@@ -163,6 +166,7 @@ public class AccountResource {
     @PostMapping(path = "/account/change-password",
         produces = MediaType.TEXT_PLAIN_VALUE)
     @Timed
+    @Secured({AuthoritiesConstants.ADMIN, AuthoritiesConstants.LECTURER, AuthoritiesConstants.MEMBER})
     public ResponseEntity changePassword(@RequestBody String password) {
         if (!checkPasswordLength(password)) {
             return new ResponseEntity<>(CHECK_ERROR_MESSAGE, HttpStatus.BAD_REQUEST);
