@@ -23,6 +23,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -75,7 +79,7 @@ public class UserResource {
     private final UserSearchRepository userSearchRepository;
 
     public UserResource(UserRepository userRepository, MailService mailService,
-            UserService userService, UserSearchRepository userSearchRepository) {
+                        UserService userService, UserSearchRepository userSearchRepository) {
 
         this.userRepository = userRepository;
         this.mailService = mailService;
@@ -104,7 +108,7 @@ public class UserResource {
             return ResponseEntity.badRequest()
                 .headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new user cannot already have an ID"))
                 .body(null);
-        // Lowercase the user login before comparing with database
+            // Lowercase the user login before comparing with database
         } else if (userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase()).isPresent()) {
             return ResponseEntity.badRequest()
                 .headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "userexists", "Login already in use"))
@@ -117,7 +121,7 @@ public class UserResource {
             User newUser = userService.createUser(managedUserVM);
             mailService.sendCreationEmail(newUser);
             return ResponseEntity.created(new URI("/api/users/" + newUser.getLogin()))
-                .headers(HeaderUtil.createAlert( "userManagement.created", newUser.getLogin()))
+                .headers(HeaderUtil.createAlert("userManagement.created", newUser.getLogin()))
                 .body(newUser);
         }
     }
@@ -196,11 +200,28 @@ public class UserResource {
      */
     @DeleteMapping("/users/{login:" + Constants.LOGIN_REGEX + "}")
     @Timed
-    @Secured(AuthoritiesConstants.ADMIN)
+    @Secured({AuthoritiesConstants.ADMIN, AuthoritiesConstants.LECTURER})
     public ResponseEntity<Void> deleteUser(@PathVariable String login) {
         log.debug("REST request to delete User: {}", login);
-        userService.deleteUser(login);
-        return ResponseEntity.ok().headers(HeaderUtil.createAlert( "userManagement.deleted", login)).build();
+        boolean hasAuthorityLecturer = false;
+        boolean hasAuthorityAdmin = false;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        hasAuthorityAdmin = authorities.contains(new SimpleGrantedAuthority(AuthoritiesConstants.ADMIN));
+        hasAuthorityLecturer = authorities.contains(new SimpleGrantedAuthority(AuthoritiesConstants.LECTURER));
+        if (hasAuthorityAdmin) {
+            // delete user
+            userService.deleteUser(login);
+        } else {
+            if (hasAuthorityLecturer) {
+                // delete user if it is a student
+                if (userService.getAuthorities().size() == 4 && userService.getAuthorities().contains(AuthoritiesConstants.MEMBER)) {
+                    log.debug("REST request to delete Member: {}", AuthoritiesConstants.MEMBER);
+                    userService.deleteUser(login);
+                }
+            }
+        }
+        return ResponseEntity.ok().headers(HeaderUtil.createAlert("userManagement.deleted", login)).build();
     }
 
     /**
