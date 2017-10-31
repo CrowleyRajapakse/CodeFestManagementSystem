@@ -44,7 +44,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class CompetitionResourceIntTest {
 
     private static final String DEFAULT_TITLE = "Test Title";
-    private static final String UPDATED_TITLE = "BBBBBBBBBB";
+    private static final String UPDATED_TITLE = "New Title";
 
     private static final String DEFAULT_THEME = "AAAAAAAAAA";
     private static final String UPDATED_THEME = "BBBBBBBBBB";

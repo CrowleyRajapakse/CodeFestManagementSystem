@@ -47,7 +47,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = CodeFestManagementSystemV1App.class)
 public class EventResourceIntTest {
 
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String DEFAULT_NAME = "Test Title";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
