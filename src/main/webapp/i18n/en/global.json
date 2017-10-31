@@ -10,6 +10,7 @@
                 "competition": "Competition",
                 "event": "Event",
                 "workshop": "Workshop",
+                "feedback": "Feedback",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

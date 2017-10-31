@@ -31,6 +31,10 @@ public class ElasticsearchIndexService {
 
     private final EventSearchRepository eventSearchRepository;
 
+    private final FeedbackRepository feedbackRepository;
+
+    private final FeedbackSearchRepository feedbackSearchRepository;
+
     private final WorkshopRepository workshopRepository;
 
     private final WorkshopSearchRepository workshopSearchRepository;
@@ -48,6 +52,8 @@ public class ElasticsearchIndexService {
         CompetitionSearchRepository competitionSearchRepository,
         EventRepository eventRepository,
         EventSearchRepository eventSearchRepository,
+        FeedbackRepository feedbackRepository,
+        FeedbackSearchRepository feedbackSearchRepository,
         WorkshopRepository workshopRepository,
         WorkshopSearchRepository workshopSearchRepository,
         ElasticsearchTemplate elasticsearchTemplate) {
@@ -57,6 +63,8 @@ public class ElasticsearchIndexService {
         this.competitionSearchRepository = competitionSearchRepository;
         this.eventRepository = eventRepository;
         this.eventSearchRepository = eventSearchRepository;
+        this.feedbackRepository = feedbackRepository;
+        this.feedbackSearchRepository = feedbackSearchRepository;
         this.workshopRepository = workshopRepository;
         this.workshopSearchRepository = workshopSearchRepository;
         this.elasticsearchTemplate = elasticsearchTemplate;
@@ -67,6 +75,7 @@ public class ElasticsearchIndexService {
     public void reindexAll() {
         reindexForClass(Competition.class, competitionRepository, competitionSearchRepository);
         reindexForClass(Event.class, eventRepository, eventSearchRepository);
+        reindexForClass(Feedback.class, feedbackRepository, feedbackSearchRepository);
         reindexForClass(Workshop.class, workshopRepository, workshopSearchRepository);
         reindexForClass(User.class, userRepository, userSearchRepository);
 
