@@ -5,7 +5,7 @@
             "relationshipName": "competition",
             "otherEntityName": "competition",
             "relationshipType": "many-to-one",
-            "otherEntityField": "id"
+            "otherEntityField": "title"
         }
     ],
     "fields": [

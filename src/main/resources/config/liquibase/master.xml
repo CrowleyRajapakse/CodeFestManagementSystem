@@ -8,8 +8,14 @@
     <include file="config/liquibase/changelog/20170925024051_added_entity_Competition.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170925030452_added_entity_Event.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170925031101_added_entity_Workshop.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171031185449_added_entity_Feedback.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171101092255_added_entity_Resultevent.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171031103303_added_entity_Competitor.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171101124944_added_entity_ApplicationForm.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20170925030452_added_entity_constraints_Event.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170925031101_added_entity_constraints_Workshop.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171101092255_added_entity_constraints_Resultevent.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171031103303_added_entity_constraints_Competitor.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

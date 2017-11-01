@@ -1,0 +1,43 @@
+
+<div>
+    <h2><span data-translate="codeFestManagementSystemV1App.applicationForm.detail.title">Application Form</span> {{vm.applicationForm.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="codeFestManagementSystemV1App.applicationForm.name">Name</span></dt>
+        <dd>
+            <span>{{vm.applicationForm.name}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.applicationForm.dob">Dob</span></dt>
+        <dd>
+            <span>{{vm.applicationForm.dob | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.applicationForm.year">Year</span></dt>
+        <dd>
+            <span>{{vm.applicationForm.year}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.applicationForm.email">Email</span></dt>
+        <dd>
+            <span>{{vm.applicationForm.email}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.applicationForm.phone">Phone</span></dt>
+        <dd>
+            <span>{{vm.applicationForm.phone}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.applicationForm.category">Category</span></dt>
+        <dd>
+            <span>{{vm.applicationForm.category}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="application-form-detail.edit({id:vm.applicationForm.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

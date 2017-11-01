@@ -1,0 +1,91 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myResulteventLabel" data-translate="codeFestManagementSystemV1App.resultevent.home.createOrEditLabel">Create or edit a Results</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.resultevent.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.resultevent.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="codeFestManagementSystemV1App.resultevent.winner" for="field_winner">Winner</label>
+            <input type="text" class="form-control" name="winner" id="field_winner"
+                    ng-model="vm.resultevent.winner"
+                    required/>
+            <div ng-show="editForm.winner.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.winner.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="codeFestManagementSystemV1App.resultevent.runner_up1" for="field_runner_up1">Runner Up 1</label>
+            <input type="text" class="form-control" name="runner_up1" id="field_runner_up1"
+                    ng-model="vm.resultevent.runner_up1"
+                    required/>
+            <div ng-show="editForm.runner_up1.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.runner_up1.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="codeFestManagementSystemV1App.resultevent.runner_up2" for="field_runner_up2">Runner Up 2</label>
+            <input type="text" class="form-control" name="runner_up2" id="field_runner_up2"
+                    ng-model="vm.resultevent.runner_up2"
+                    required/>
+            <div ng-show="editForm.runner_up2.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.runner_up2.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="codeFestManagementSystemV1App.resultevent.merit1" for="field_merit1">Merit 1</label>
+            <input type="text" class="form-control" name="merit1" id="field_merit1"
+                    ng-model="vm.resultevent.merit1"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="codeFestManagementSystemV1App.resultevent.merit2" for="field_merit2">Merit 2</label>
+            <input type="text" class="form-control" name="merit2" id="field_merit2"
+                    ng-model="vm.resultevent.merit2"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="codeFestManagementSystemV1App.resultevent.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                    ng-model="vm.resultevent.description"
+                    />
+        </div>
+
+        <div class="form-group">
+            <label data-translate="codeFestManagementSystemV1App.resultevent.eventresult" for="field_eventresult">Events</label>
+            <select class="form-control" id="field_eventresult" name="eventresult" ng-model="vm.resultevent.eventresultId" ng-options="event.id as event.name for event in vm.events"             required>
+            </select>
+        </div>
+        <div ng-show="editForm.eventresult.$invalid">
+            <p class="help-block"
+                ng-show="editForm.eventresult.$error.required" data-translate="entity.validation.required">
+                This field is required.
+            </p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

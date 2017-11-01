@@ -63,5 +63,8 @@
   },
   "scripts": {
     "test": "gulp test"
+  },
+  "dependencies": {
+    "generator-jhipster-elasticsearch-reindexer": "^1.0.2"
   }
 }

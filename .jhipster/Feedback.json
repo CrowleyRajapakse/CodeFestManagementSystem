@@ -1,0 +1,33 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "recipient",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "message",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20171031185449",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "feedback",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}

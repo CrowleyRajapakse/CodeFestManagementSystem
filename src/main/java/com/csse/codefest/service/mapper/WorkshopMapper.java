@@ -12,6 +12,7 @@ import org.mapstruct.*;
 public interface WorkshopMapper extends EntityMapper <WorkshopDTO, Workshop> {
 
     @Mapping(source = "competition.id", target = "competitionId")
+    @Mapping(source = "competition.title", target = "competitionTitle")
     WorkshopDTO toDto(Workshop workshop); 
 
     @Mapping(source = "competitionId", target = "competition")

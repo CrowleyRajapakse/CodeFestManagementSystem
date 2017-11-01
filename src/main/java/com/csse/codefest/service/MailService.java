@@ -41,7 +41,7 @@ public class MailService {
     private final SpringTemplateEngine templateEngine;
 
     public MailService(JHipsterProperties jHipsterProperties, JavaMailSender javaMailSender,
-            MessageSource messageSource, SpringTemplateEngine templateEngine) {
+                       MessageSource messageSource, SpringTemplateEngine templateEngine) {
 
         this.jHipsterProperties = jHipsterProperties;
         this.javaMailSender = javaMailSender;
@@ -101,5 +101,18 @@ public class MailService {
     public void sendPasswordResetMail(User user) {
         log.debug("Sending password reset email to '{}'", user.getEmail());
         sendEmailFromTemplate(user, "passwordResetEmail", "email.reset.title");
+    }
+
+    @Async
+    public void sendFeedbackMail(String recipient, String email, String message) {
+        log.debug("Sending feedback email to '{}'", email);
+        Locale locale = Locale.forLanguageTag("en");
+        String subject = messageSource.getMessage("email.feedback.title", null, locale);
+        Context context = new Context(locale);
+        context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
+        context.setVariable("recipient", recipient);
+        context.setVariable("message", message);
+        String content = templateEngine.process("feedBackEmail", context);
+        sendEmail(email, subject, content, false, true);
     }
 }

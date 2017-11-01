@@ -94,7 +94,7 @@
 
         <div class="form-group">
             <label data-translate="codeFestManagementSystemV1App.event.competition" for="field_competition">Competition</label>
-            <select class="form-control" id="field_competition" name="competition" ng-model="vm.event.competitionId" ng-options="competition.id as competition.id for competition in vm.competitions"            >
+            <select class="form-control" id="field_competition" name="competition" ng-model="vm.event.competitionId" ng-options="competition.id as competition.title for competition in vm.competitions"            >
                 <option value=""></option>
             </select>
         </div>

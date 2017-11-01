@@ -1,0 +1,55 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "eventresult",
+            "otherEntityName": "event",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "winner",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "runner_up1",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "runner_up2",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "merit1",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "merit2",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20171101092255",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "resultevent",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

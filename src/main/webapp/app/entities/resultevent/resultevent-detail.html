@@ -1,0 +1,47 @@
+
+<div>
+    <h2><span data-translate="codeFestManagementSystemV1App.resultevent.detail.title">Results</span> {{vm.resultevent.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="codeFestManagementSystemV1App.resultevent.winner">Winner</span></dt>
+        <dd>
+            <span>{{vm.resultevent.winner}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.resultevent.runner_up1">Runner Up 1</span></dt>
+        <dd>
+            <span>{{vm.resultevent.runner_up1}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.resultevent.runner_up2">Runner Up 2</span></dt>
+        <dd>
+            <span>{{vm.resultevent.runner_up2}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.resultevent.merit1">Merit 1</span></dt>
+        <dd>
+            <span>{{vm.resultevent.merit1}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.resultevent.merit2">Merit 2</span></dt>
+        <dd>
+            <span>{{vm.resultevent.merit2}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.resultevent.description">Description</span></dt>
+        <dd>
+            <span>{{vm.resultevent.description}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.resultevent.eventresult">Events</span></dt>
+        <dd>
+            <a ui-sref="event-detail({id:vm.resultevent.eventresultId})">{{vm.resultevent.eventresultName}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="resultevent-detail.edit({id:vm.resultevent.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
