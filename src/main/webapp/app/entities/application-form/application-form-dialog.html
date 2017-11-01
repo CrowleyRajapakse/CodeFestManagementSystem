@@ -28,8 +28,7 @@
         <div class="form-group">
             <label class="control-label" data-translate="codeFestManagementSystemV1App.applicationForm.dob" for="field_dob">Dob</label>
                 <div class="input-group">
-                    <input id="field_dob" type="text" class="form-control" name="dob" uib-datepicker-popup="{{dateformat}}" ng-model="vm.applicationForm.dob" is-open="vm.datePickerOpenStatus.dob"
-                    />
+                    <input id="field_dob" type="text" class="form-control" name="dob" uib-datepicker-popup="{{dateformat}}" ng-model="vm.applicationForm.dob" is-open="vm.datePickerOpenStatus.dob"/>
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('dob')"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
@@ -53,13 +52,17 @@
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="codeFestManagementSystemV1App.applicationForm.email" for="field_email">Email</label>
-            <input type="text" class="form-control" name="email" id="field_email"
+            <input type="email" class="form-control" name="email" id="field_email"
                     ng-model="vm.applicationForm.email"
                     required/>
             <div ng-show="editForm.email.$invalid">
                 <p class="help-block"
                     ng-show="editForm.email.$error.required" data-translate="entity.validation.required">
                     This field is required.
+                </p>
+                <p class="help-block"
+                   ng-show="editForm.email.$error.email" data-translate="global.messages.validate.email.invalid">
+                    Your Email is Invalid.
                 </p>
             </div>
         </div>
