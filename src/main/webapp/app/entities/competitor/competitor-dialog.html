@@ -55,13 +55,17 @@
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="codeFestManagementSystemV1App.competitor.email" for="field_email">Email</label>
-            <input type="text" class="form-control" name="email" id="field_email"
+            <input type="email" class="form-control" name="email" id="field_email"
                     ng-model="vm.competitor.email"
                     required/>
             <div ng-show="editForm.email.$invalid">
                 <p class="help-block"
                     ng-show="editForm.email.$error.required" data-translate="entity.validation.required">
                     This field is required.
+                </p>
+                <p class="help-block"
+                   ng-show="editForm.email.$error.email" data-translate="global.messages.validate.email.invalid">
+                    Your Email is Invalid.
                 </p>
             </div>
         </div>
