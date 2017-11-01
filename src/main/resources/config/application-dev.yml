@@ -53,7 +53,7 @@ spring:
         host: smtp.gmail.com
         port: 587
         username: csseproj@gmail.com
-        password: csse@#12
+        password: hypertonic16&
         protocol: smtp
         tls: true
         properties.mail.smtp:
