@@ -23,6 +23,10 @@ public class ElasticsearchIndexService {
 
     private final Logger log = LoggerFactory.getLogger(ElasticsearchIndexService.class);
 
+    private final ApplicationFormRepository applicationFormRepository;
+
+    private final ApplicationFormSearchRepository applicationFormSearchRepository;
+
     private final CompetitionRepository competitionRepository;
 
     private final CompetitionSearchRepository competitionSearchRepository;
@@ -56,6 +60,8 @@ public class ElasticsearchIndexService {
     public ElasticsearchIndexService(
         UserRepository userRepository,
         UserSearchRepository userSearchRepository,
+        ApplicationFormRepository applicationFormRepository,
+        ApplicationFormSearchRepository applicationFormSearchRepository,
         CompetitionRepository competitionRepository,
         CompetitionSearchRepository competitionSearchRepository,
         CompetitorRepository competitorRepository,
@@ -71,6 +77,8 @@ public class ElasticsearchIndexService {
         ElasticsearchTemplate elasticsearchTemplate) {
         this.userRepository = userRepository;
         this.userSearchRepository = userSearchRepository;
+        this.applicationFormRepository = applicationFormRepository;
+        this.applicationFormSearchRepository = applicationFormSearchRepository;
         this.competitionRepository = competitionRepository;
         this.competitionSearchRepository = competitionSearchRepository;
         this.competitorRepository = competitorRepository;
@@ -89,6 +97,7 @@ public class ElasticsearchIndexService {
     @Async
     @Timed
     public void reindexAll() {
+        reindexForClass(ApplicationForm.class, applicationFormRepository, applicationFormSearchRepository);
         reindexForClass(Competition.class, competitionRepository, competitionSearchRepository);
         reindexForClass(Competitor.class, competitorRepository, competitorSearchRepository);
         reindexForClass(Event.class, eventRepository, eventSearchRepository);
