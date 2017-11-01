@@ -37,6 +37,8 @@ public class EventDTO implements Serializable {
 
     private Long competitionId;
 
+    private String competitionTitle;
+
     public Long getId() {
         return id;
     }
@@ -115,6 +117,14 @@ public class EventDTO implements Serializable {
 
     public void setCompetitionId(Long competitionId) {
         this.competitionId = competitionId;
+    }
+
+    public String getCompetitionTitle() {
+        return competitionTitle;
+    }
+
+    public void setCompetitionTitle(String competitionTitle) {
+        this.competitionTitle = competitionTitle;
     }
 
     @Override

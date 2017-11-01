@@ -1,0 +1,92 @@
+<div>
+    <h2 data-translate="codeFestManagementSystemV1App.resultevent.home.title">Results</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="resultevent.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="hidden-xs-down"  data-translate="codeFestManagementSystemV1App.resultevent.home.createLabel">
+                        Create new Result
+                    </span>
+                </button>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'codeFestManagementSystemV1App.resultevent.home.search' | translate }}">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info" ng-click="vm.clear()">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="eventresultName"><span data-translate="codeFestManagementSystemV1App.resultevent.eventresult">Event</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="winner"><span data-translate="codeFestManagementSystemV1App.resultevent.winner">Winner</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="runner_up1"><span data-translate="codeFestManagementSystemV1App.resultevent.runner_up1">Runner Up 1</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="runner_up2"><span data-translate="codeFestManagementSystemV1App.resultevent.runner_up2">Runner Up 2</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="merit1"><span data-translate="codeFestManagementSystemV1App.resultevent.merit1">Merit 1</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="merit2"><span data-translate="codeFestManagementSystemV1App.resultevent.merit2">Merit 2</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="description"><span data-translate="codeFestManagementSystemV1App.resultevent.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="resultevent in vm.resultevents track by resultevent.id">
+                    <td><a ui-sref="resultevent-detail({id:resultevent.id})">{{resultevent.id}}</a></td>
+                    <td>
+                        <a ui-sref="event-detail({id:resultevent.eventresultId})">{{resultevent.eventresultName}}</a>
+                    </td>
+                    <td>{{resultevent.winner}}</td>
+                    <td>{{resultevent.runner_up1}}</td>
+                    <td>{{resultevent.runner_up2}}</td>
+                    <td>{{resultevent.merit1}}</td>
+                    <td>{{resultevent.merit2}}</td>
+                    <td>{{resultevent.description}}</td>
+
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="resultevent-detail({id:resultevent.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="resultevent.edit({id:resultevent.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="resultevent.delete({id:resultevent.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+{
+    "codeFestManagementSystemV1App": {
+        "resultevent" : {
+            "home": {
+                "title": "Resultevents",
+                "createLabel": "Create a new Resultevent",
+                "createOrEditLabel": "Create or edit a Resultevent",
+                "search": "Search for Resultevent"
+            },
+            "created": "A new Resultevent is created with identifier {{ param }}",
+            "updated": "A Resultevent is updated with identifier {{ param }}",
+            "deleted": "A Resultevent is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Resultevent {{ id }}?"
+            },
+            "detail": {
+                "title": "Resultevent"
+            },
+            "winner": "Winner",
+            "runner_up1": "Runner Up 1",
+            "runner_up2": "Runner Up 2",
+            "merit1": "Merit 1",
+            "merit2": "Merit 2",
+            "description": "Description",
+            "eventresult": "Eventresult"
+        }
+    }
+}

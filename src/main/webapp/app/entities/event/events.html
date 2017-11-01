@@ -44,7 +44,7 @@
                     <th jh-sort-by="etime"><span data-translate="codeFestManagementSystemV1App.event.etime">Etime</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="ecoordinator"><span data-translate="codeFestManagementSystemV1App.event.ecoordinator">Ecoordinator</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="teamCompetitorName"><span data-translate="codeFestManagementSystemV1App.event.teamCompetitorName">Team Competitor Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="competitionId"><span data-translate="codeFestManagementSystemV1App.event.competition">Competition</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="competitionTitle"><span data-translate="codeFestManagementSystemV1App.event.competition">Competition</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -60,7 +60,7 @@
                     <td>{{event.ecoordinator}}</td>
                     <td>{{event.teamCompetitorName}}</td>
                     <td>
-                        <a ui-sref="competition-detail({id:event.competitionId})">{{event.competitionId}}</a>
+                        <a ui-sref="competition-detail({id:event.competitionId})">{{event.competitionTitle}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
