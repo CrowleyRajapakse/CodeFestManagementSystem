@@ -3,6 +3,7 @@ package com.csse.codefest.web.rest;
 import com.csse.codefest.config.Constants;
 import com.codahale.metrics.annotation.Timed;
 import com.csse.codefest.domain.User;
+import com.csse.codefest.domain.Authority;
 import com.csse.codefest.repository.UserRepository;
 import com.csse.codefest.repository.search.UserSearchRepository;
 import com.csse.codefest.security.AuthoritiesConstants;
@@ -212,16 +213,29 @@ public class UserResource {
         if (hasAuthorityAdmin) {
             // delete user
             userService.deleteUser(login);
+            return ResponseEntity.ok().headers(HeaderUtil.createAlert("userManagement.deleted", login)).build();
         } else {
+            Optional<User> user = userService.getUserWithAuthoritiesByLogin(login);
+            Set<Authority> currentUserAuthorities = user.get().getAuthorities();
+            log.debug("REST request to delete User: {}", user);
+            log.debug("REST request to delete Member: {}", currentUserAuthorities);
+            boolean hasDeletedMembByLect = false;
             if (hasAuthorityLecturer) {
-                // delete user if it is a student
-                if (userService.getAuthorities().size() == 4 && userService.getAuthorities().contains(AuthoritiesConstants.MEMBER)) {
-                    log.debug("REST request to delete Member: {}", AuthoritiesConstants.MEMBER);
-                    userService.deleteUser(login);
+                for (Authority auth : currentUserAuthorities) {
+                    // delete user if it is a student
+                    if (auth.getName().equals(AuthoritiesConstants.MEMBER)) {
+                        userService.deleteUser(login);
+                        hasDeletedMembByLect = true;
+                    }
+                }
+                if (hasDeletedMembByLect) {
+                    return ResponseEntity.ok().headers(HeaderUtil.createAlert("userManagement.deleted", login)).build();
                 }
             }
+            return ResponseEntity.badRequest()
+                .headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "AccessDenied", "Lecturer can delete only members"))
+                .body(null);
         }
-        return ResponseEntity.ok().headers(HeaderUtil.createAlert("userManagement.deleted", login)).build();
     }
 
     /**
