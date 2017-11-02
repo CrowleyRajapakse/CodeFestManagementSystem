@@ -124,7 +124,7 @@ public class MailService {
         context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
         context.setVariable("recipient", recipient);
         context.setVariable("message", message);
-        String content = templateEngine.process("GetDetailsEmail", context);
+        String content = templateEngine.process("getDetailsEmail", context);
         sendEmail("csseproj@gmail.com", subject, content, false, true);
     }
 }
