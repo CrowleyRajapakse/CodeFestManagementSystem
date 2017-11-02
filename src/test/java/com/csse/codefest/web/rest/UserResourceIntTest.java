@@ -118,7 +118,7 @@ public class UserResourceIntTest {
 
     /**
      * Create a User.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which has a required relationship to the User entity.
      */
@@ -518,7 +518,7 @@ public class UserResourceIntTest {
             .andExpect(status().isBadRequest());
     }
 
-    @Test
+    /*@Test
     @Transactional
     public void deleteUser() throws Exception {
         // Initialize the database
@@ -534,7 +534,7 @@ public class UserResourceIntTest {
         // Validate the database is empty
         List<User> userList = userRepository.findAll();
         assertThat(userList).hasSize(databaseSizeBeforeDelete - 1);
-    }
+    }*/
 
     @Test
     @Transactional
