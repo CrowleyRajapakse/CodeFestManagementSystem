@@ -1,6 +1,7 @@
 package com.csse.codefest.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.csse.codefest.service.MailService;
 import com.csse.codefest.service.CompetitorService;
 import com.csse.codefest.web.rest.util.HeaderUtil;
 import com.csse.codefest.web.rest.util.PaginationUtil;
@@ -39,8 +40,11 @@ public class CompetitorResource {
 
     private final CompetitorService competitorService;
 
-    public CompetitorResource(CompetitorService competitorService) {
+    private final MailService mailService;
+
+    public CompetitorResource(CompetitorService competitorService,MailService mailService) {
         this.competitorService = competitorService;
+        this.mailService = mailService;
     }
 
     /**
@@ -58,6 +62,7 @@ public class CompetitorResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new competitor cannot already have an ID")).body(null);
         }
         CompetitorDTO result = competitorService.save(competitorDTO);
+        mailService.sendGetDetailsMail(competitorDTO.getName(), competitorDTO.getEmail(), competitorDTO.getEventsName());
         return ResponseEntity.created(new URI("/api/competitors/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
