@@ -19,11 +19,12 @@
             "name": "Name",
             "description": "Description",
             "venue": "Venue",
-            "startDate": "Start Date",
-            "endDate": "End Date",
-            "etime": "Etime",
-            "ecoordinator": "Ecoordinator",
-            "teamCompetitorName": "Team Competitor Name",
+            "start_Date": "Start Date",
+            "end_Date": "End Date",
+            "start_time": "Start Time",
+            "end_time": "End Time",
+            "event_Coordinator": "Event Coordinator",
+            "sponser_Name": "Sponser Name",
             "competition": "Competition"
         }
     }

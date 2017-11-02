@@ -43,17 +43,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = CodeFestManagementSystemV1App.class)
 public class WorkshopResourceIntTest {
 
-    private static final String DEFAULT_TITLE = "AAAAAAAAAA";
-    private static final String UPDATED_TITLE = "BBBBBBBBBB";
+    private static final String DEFAULT_TITLE = "Test Title";
+    private static final String UPDATED_TITLE = "New Title";
 
-    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
-    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+    private static final String DEFAULT_DESCRIPTION = "Test Description";
+    private static final String UPDATED_DESCRIPTION = "New Description";
 
-    private static final String DEFAULT_VENUE = "AAAAAAAAAA";
-    private static final String UPDATED_VENUE = "BBBBBBBBBB";
+    private static final String DEFAULT_VENUE = "Test Venue";
+    private static final String UPDATED_VENUE = "New Venue";
 
-    private static final String DEFAULT_WCOORDINATOR = "AAAAAAAAAA";
-    private static final String UPDATED_WCOORDINATOR = "BBBBBBBBBB";
+    private static final String DEFAULT_WCOORDINATOR = "Test Coordinator";
+    private static final String UPDATED_WCOORDINATOR = "New Coordinator";
 
     private static final LocalDate DEFAULT_SW_TIME = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_SW_TIME = LocalDate.now(ZoneId.systemDefault());

@@ -16,9 +16,10 @@
                 transformResponse: function (data) {
                     if (data) {
                         data = angular.fromJson(data);
-                        data.startDate = DateUtils.convertLocalDateFromServer(data.startDate);
-                        data.endDate = DateUtils.convertLocalDateFromServer(data.endDate);
-                        data.etime = DateUtils.convertDateTimeFromServer(data.etime);
+                        data.start_Date = DateUtils.convertLocalDateFromServer(data.start_Date);
+                        data.end_Date = DateUtils.convertLocalDateFromServer(data.end_Date);
+                        data.start_time = DateUtils.convertDateTimeFromServer(data.start_time);
+                        data.end_time = DateUtils.convertDateTimeFromServer(data.end_time);
                     }
                     return data;
                 }
@@ -27,8 +28,8 @@
                 method: 'PUT',
                 transformRequest: function (data) {
                     var copy = angular.copy(data);
-                    copy.startDate = DateUtils.convertLocalDateToServer(copy.startDate);
-                    copy.endDate = DateUtils.convertLocalDateToServer(copy.endDate);
+                    copy.start_Date = DateUtils.convertLocalDateToServer(copy.start_Date);
+                    copy.end_Date = DateUtils.convertLocalDateToServer(copy.end_Date);
                     return angular.toJson(copy);
                 }
             },
@@ -36,8 +37,8 @@
                 method: 'POST',
                 transformRequest: function (data) {
                     var copy = angular.copy(data);
-                    copy.startDate = DateUtils.convertLocalDateToServer(copy.startDate);
-                    copy.endDate = DateUtils.convertLocalDateToServer(copy.endDate);
+                    copy.start_Date = DateUtils.convertLocalDateToServer(copy.start_Date);
+                    copy.end_Date = DateUtils.convertLocalDateToServer(copy.end_Date);
                     return angular.toJson(copy);
                 }
             }

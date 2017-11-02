@@ -4,7 +4,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="vm.clear()">&times;</button>
-        <h4 class="modal-title" id="myResulteventLabel" data-translate="codeFestManagementSystemV1App.resultevent.home.createOrEditLabel">Create or edit a Results</h4>
+        <h4 class="modal-title" id="myResulteventLabel" >Create or edit a Results</h4>
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
@@ -69,7 +69,7 @@
         </div>
 
         <div class="form-group">
-            <label data-translate="codeFestManagementSystemV1App.resultevent.eventresult" for="field_eventresult">Events</label>
+            <label  for="field_eventresult">Events</label>
             <select class="form-control" id="field_eventresult" name="eventresult" ng-model="vm.resultevent.eventresultId" ng-options="event.id as event.name for event in vm.events"             required>
             </select>
         </div>

@@ -127,11 +127,12 @@
                                 name: null,
                                 description: null,
                                 venue: null,
-                                startDate: null,
-                                endDate: null,
-                                etime: null,
-                                ecoordinator: null,
-                                teamCompetitorName: null,
+                                start_Date: null,
+                                end_Date: null,
+                                start_time: null,
+                                end_time: null,
+                                event_Coordinator: null,
+                                sponser_Name: null,
                                 id: null
                             };
                         }
