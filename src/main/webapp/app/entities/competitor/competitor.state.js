@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/competitor?page&sort&search',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_USER','ROLE_LECTURER','ROLE_MEMBER'],
                 pageTitle: 'codeFestManagementSystemV1App.competitor.home.title'
             },
             views: {
@@ -55,7 +55,7 @@
             parent: 'competitor',
             url: '/competitor/{id}',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_USER','ROLE_LECTURER','ROLE_MEMBER'],
                 pageTitle: 'codeFestManagementSystemV1App.competitor.detail.title'
             },
             views: {
@@ -87,7 +87,7 @@
             parent: 'competitor-detail',
             url: '/detail/edit',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_LECTURER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -146,7 +146,7 @@
             parent: 'competitor',
             url: '/{id}/edit',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_USER','ROLE_LECTURER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -171,7 +171,7 @@
             parent: 'competitor',
             url: '/{id}/delete',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_LECTURER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({

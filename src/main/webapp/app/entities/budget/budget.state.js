@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/budget?page&sort&search',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_LECTURER'],
                 pageTitle: 'codeFestManagementSystemV1App.budget.home.title'
             },
             views: {
@@ -55,7 +55,7 @@
             parent: 'budget',
             url: '/budget/{id}',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_LECTURER'],
                 pageTitle: 'codeFestManagementSystemV1App.budget.detail.title'
             },
             views: {
@@ -87,7 +87,7 @@
             parent: 'budget-detail',
             url: '/detail/edit',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_LECTURER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -112,7 +112,7 @@
             parent: 'budget',
             url: '/new',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_LECTURER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -147,7 +147,7 @@
             parent: 'budget',
             url: '/{id}/edit',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_LECTURER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -172,7 +172,7 @@
             parent: 'budget',
             url: '/{id}/delete',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_LECTURER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({

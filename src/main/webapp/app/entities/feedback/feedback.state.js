@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/feedback',
             data: {
-                authorities: ['ROLE_ADMIN','ROLE_LECTURER'],
+                authorities: ['ROLE_ADMIN','ROLE_LECTURER','ROLE_MEMBER','ROLE_USER'],
                 pageTitle: 'codeFestManagementSystemV1App.feedback.home.title'
             },
             views: {
@@ -35,7 +35,7 @@
             parent: 'feedback',
             url: '/feedback/{id}',
             data: {
-                authorities: ['ROLE_ADMIN','ROLE_LECTURER'],
+                authorities: ['ROLE_ADMIN','ROLE_LECTURER','ROLE_MEMBER','ROLE_USER'],
                 pageTitle: 'codeFestManagementSystemV1App.feedback.detail.title'
             },
             views: {
@@ -92,7 +92,7 @@
             parent: 'feedback',
             url: '/new',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_USER','ROLE_MEMBER','ROLE_LECTURER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
