@@ -6,6 +6,7 @@ import com.csse.codefest.domain.Competitor;
 import com.csse.codefest.domain.Event;
 import com.csse.codefest.repository.CompetitorRepository;
 import com.csse.codefest.service.CompetitorService;
+import com.csse.codefest.service.MailService;
 import com.csse.codefest.repository.search.CompetitorSearchRepository;
 import com.csse.codefest.service.dto.CompetitorDTO;
 import com.csse.codefest.service.mapper.CompetitorMapper;
@@ -73,6 +74,9 @@ public class CompetitorResourceIntTest {
     private CompetitorService competitorService;
 
     @Autowired
+    private MailService mailService;
+
+    @Autowired
     private CompetitorSearchRepository competitorSearchRepository;
 
     @Autowired
@@ -94,7 +98,7 @@ public class CompetitorResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final CompetitorResource competitorResource = new CompetitorResource(competitorService);
+        final CompetitorResource competitorResource = new CompetitorResource(competitorService, mailService);
         this.restCompetitorMockMvc = MockMvcBuilders.standaloneSetup(competitorResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -103,7 +107,7 @@ public class CompetitorResourceIntTest {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
