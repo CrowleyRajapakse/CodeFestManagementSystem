@@ -1,0 +1,55 @@
+
+<div>
+    <h2><span data-translate="codeFestManagementSystemV1App.budget.detail.title">Budget</span> {{vm.budget.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="codeFestManagementSystemV1App.budget.food">Food</span></dt>
+        <dd>
+            <span>{{vm.budget.food}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.budget.decorations">Decorations</span></dt>
+        <dd>
+            <span>{{vm.budget.decorations}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.budget.prizes">Prizes</span></dt>
+        <dd>
+            <span>{{vm.budget.prizes}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.budget.photography">Photography</span></dt>
+        <dd>
+            <span>{{vm.budget.photography}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.budget.transport">Transport</span></dt>
+        <dd>
+            <span>{{vm.budget.transport}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.budget.stationery">Stationery</span></dt>
+        <dd>
+            <span>{{vm.budget.stationery}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.budget.guests">Guests</span></dt>
+        <dd>
+            <span>{{vm.budget.guests}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.budget.other">Other</span></dt>
+        <dd>
+            <span>{{vm.budget.other}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.budget.event">Event</span></dt>
+        <dd>
+            <a ui-sref="event-detail({id:vm.budget.eventId})">{{vm.budget.eventName}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="budget-detail.edit({id:vm.budget.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
