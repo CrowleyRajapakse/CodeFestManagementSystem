@@ -5,6 +5,7 @@ import com.csse.codefest.CodeFestManagementSystemV1App;
 import com.csse.codefest.domain.Feedback;
 import com.csse.codefest.repository.FeedbackRepository;
 import com.csse.codefest.service.FeedbackService;
+import com.csse.codefest.service.MailService;
 import com.csse.codefest.repository.search.FeedbackSearchRepository;
 import com.csse.codefest.service.dto.FeedbackDTO;
 import com.csse.codefest.service.mapper.FeedbackMapper;
@@ -60,6 +61,9 @@ public class FeedbackResourceIntTest {
     private FeedbackService feedbackService;
 
     @Autowired
+    private MailService mailService;
+
+    @Autowired
     private FeedbackSearchRepository feedbackSearchRepository;
 
     @Autowired
@@ -81,7 +85,7 @@ public class FeedbackResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final FeedbackResource feedbackResource = new FeedbackResource(feedbackService);
+        final FeedbackResource feedbackResource = new FeedbackResource(feedbackService,mailService);
         this.restFeedbackMockMvc = MockMvcBuilders.standaloneSetup(feedbackResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
