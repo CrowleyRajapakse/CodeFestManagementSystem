@@ -215,6 +215,7 @@ public class UserResource {
             userService.deleteUser(login);
             return ResponseEntity.ok().headers(HeaderUtil.createAlert("userManagement.deleted", login)).build();
         } else {
+            //get the authority of the user which is going to delete
             Optional<User> user = userService.getUserWithAuthoritiesByLogin(login);
             Set<Authority> currentUserAuthorities = user.get().getAuthorities();
             log.debug("REST request to delete User: {}", user);
