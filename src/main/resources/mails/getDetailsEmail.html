@@ -6,10 +6,14 @@
     <link rel="shortcut icon" th:href="@{|${baseUrl}/favicon.ico|}"/>
 </head>
 <body>
-<p th:text="#{email.getDetails.greeting(${recipient})}">
-    Dear
+<p th:text="#{email.getDetails.greeting}">
 </p>
-<p th:text="${message}"></p>
+<p th:text="${name}"></p>
+<p th:text="${email}"></p>
+<p th:text="${eventsName}"></p>
+<p th:text="${age}"></p>
+<p th:text="${phone}"></p>
+<p th:text="${category}"></p>
 <p>
     <span th:text="#{email.getDetails.text2}">Regards, </span>
     <br/>

@@ -42,7 +42,7 @@ public class CompetitorResource {
 
     private final MailService mailService;
 
-    public CompetitorResource(CompetitorService competitorService,MailService mailService) {
+    public CompetitorResource(CompetitorService competitorService, MailService mailService) {
         this.competitorService = competitorService;
         this.mailService = mailService;
     }
@@ -62,7 +62,7 @@ public class CompetitorResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new competitor cannot already have an ID")).body(null);
         }
         CompetitorDTO result = competitorService.save(competitorDTO);
-        mailService.sendGetDetailsMail(competitorDTO.getName(), competitorDTO.getEmail(), competitorDTO.getEventsName());
+        mailService.sendGetDetailsMail(competitorDTO.getName(), competitorDTO.getEmail(), competitorDTO.getEventsName(), competitorDTO.getAge(), competitorDTO.getPhone(), competitorDTO.getCategory());
         return ResponseEntity.created(new URI("/api/competitors/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -137,7 +137,7 @@ public class CompetitorResource {
      * SEARCH  /_search/competitors?query=:query : search for the competitor corresponding
      * to the query.
      *
-     * @param query the query of the competitor search
+     * @param query    the query of the competitor search
      * @param pageable the pagination information
      * @return the result of the search
      */
