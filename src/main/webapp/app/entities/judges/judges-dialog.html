@@ -33,9 +33,15 @@
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="codeFestManagementSystemV1App.judges.email" for="field_email">Email</label>
-            <input type="text" class="form-control" name="email" id="field_email"
+            <input type="email" class="form-control" name="email" id="field_email"
                     ng-model="vm.judges.email"
                     />
+            <div ng-show="editForm.email.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.email.$error.email" data-translate="global.messages.validate.email.invalid">
+                    Your email is invalid.
+                </p>
+            </div>
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="codeFestManagementSystemV1App.judges.phone" for="field_phone">Phone</label>
