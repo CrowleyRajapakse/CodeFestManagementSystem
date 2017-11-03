@@ -1,0 +1,49 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+	{
+            "relationshipName": "events",
+            "otherEntityName": "event",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "name"
+        }
+	],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "gender",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "phone",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "job_title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "employer",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20171103005436",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "judges",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

@@ -1,0 +1,28 @@
+{
+    "codeFestManagementSystemV1App": {
+        "judges" : {
+            "home": {
+                "title": "Judges",
+                "createLabel": "Create a new Judges",
+                "createOrEditLabel": "Create or edit a Judges",
+                "search": "Search for Judges"
+            },
+            "created": "A new Judges is created with identifier {{ param }}",
+            "updated": "A Judges is updated with identifier {{ param }}",
+            "deleted": "A Judges is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Judges {{ id }}?"
+            },
+            "detail": {
+                "title": "Judges"
+            },
+            "name": "Name",
+            "gender": "Gender",
+            "email": "Email",
+            "phone": "Phone",
+            "job_title": "Job Title",
+            "employer": "Employer",
+            "events": "Events"
+        }
+    }
+}

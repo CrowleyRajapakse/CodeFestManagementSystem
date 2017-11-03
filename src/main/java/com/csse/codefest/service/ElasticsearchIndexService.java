@@ -47,6 +47,10 @@ public class ElasticsearchIndexService {
 
     private final FeedbackSearchRepository feedbackSearchRepository;
 
+    private final JudgesRepository judgesRepository;
+
+    private final JudgesSearchRepository judgesSearchRepository;
+
     private final ResulteventRepository resulteventRepository;
 
     private final ResulteventSearchRepository resulteventSearchRepository;
@@ -76,6 +80,8 @@ public class ElasticsearchIndexService {
         EventSearchRepository eventSearchRepository,
         FeedbackRepository feedbackRepository,
         FeedbackSearchRepository feedbackSearchRepository,
+        JudgesRepository judgesRepository,
+        JudgesSearchRepository judgesSearchRepository,
         ResulteventRepository resulteventRepository,
         ResulteventSearchRepository resulteventSearchRepository,
         WorkshopRepository workshopRepository,
@@ -95,6 +101,8 @@ public class ElasticsearchIndexService {
         this.eventSearchRepository = eventSearchRepository;
         this.feedbackRepository = feedbackRepository;
         this.feedbackSearchRepository = feedbackSearchRepository;
+        this.judgesRepository = judgesRepository;
+        this.judgesSearchRepository = judgesSearchRepository;
         this.resulteventRepository = resulteventRepository;
         this.resulteventSearchRepository = resulteventSearchRepository;
         this.workshopRepository = workshopRepository;
@@ -111,6 +119,7 @@ public class ElasticsearchIndexService {
         reindexForClass(Competitor.class, competitorRepository, competitorSearchRepository);
         reindexForClass(Event.class, eventRepository, eventSearchRepository);
         reindexForClass(Feedback.class, feedbackRepository, feedbackSearchRepository);
+        reindexForClass(Judges.class, judgesRepository, judgesSearchRepository);
         reindexForClass(Resultevent.class, resulteventRepository, resulteventSearchRepository);
         reindexForClass(Workshop.class, workshopRepository, workshopSearchRepository);
         reindexForClass(User.class, userRepository, userSearchRepository);
