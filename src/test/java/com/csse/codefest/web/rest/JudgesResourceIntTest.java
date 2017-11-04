@@ -42,23 +42,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = CodeFestManagementSystemV1App.class)
 public class JudgesResourceIntTest {
 
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "Test Name";
+    private static final String UPDATED_NAME = "Update Name";
 
-    private static final String DEFAULT_GENDER = "AAAAAAAAAA";
-    private static final String UPDATED_GENDER = "BBBBBBBBBB";
+    private static final String DEFAULT_GENDER = "Test Gender";
+    private static final String UPDATED_GENDER = "Update Gender";
 
-    private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
-    private static final String UPDATED_EMAIL = "BBBBBBBBBB";
+    private static final String DEFAULT_EMAIL = "Test Email";
+    private static final String UPDATED_EMAIL = "Update Email";
 
-    private static final String DEFAULT_PHONE = "AAAAAAAAAA";
-    private static final String UPDATED_PHONE = "BBBBBBBBBB";
+    private static final String DEFAULT_PHONE = "Test Phone";
+    private static final String UPDATED_PHONE = "Update Phone";
 
-    private static final String DEFAULT_JOB_TITLE = "AAAAAAAAAA";
-    private static final String UPDATED_JOB_TITLE = "BBBBBBBBBB";
+    private static final String DEFAULT_JOB_TITLE = "Test Jobtitle";
+    private static final String UPDATED_JOB_TITLE = "Update Jobtitle";
 
-    private static final String DEFAULT_EMPLOYER = "AAAAAAAAAA";
-    private static final String UPDATED_EMPLOYER = "BBBBBBBBBB";
+    private static final String DEFAULT_EMPLOYER = "Test Employer";
+    private static final String UPDATED_EMPLOYER = "Update Employer";
 
     @Autowired
     private JudgesRepository judgesRepository;

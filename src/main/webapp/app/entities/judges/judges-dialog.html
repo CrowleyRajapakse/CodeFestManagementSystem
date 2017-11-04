@@ -27,9 +27,13 @@
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="codeFestManagementSystemV1App.judges.gender" for="field_gender">Gender</label>
-            <input type="text" class="form-control" name="gender" id="field_gender"
-                    ng-model="vm.judges.gender"
-                    />
+            <!--<input type="text" class="form-control" name="gender" id="field_gender"-->
+                    <!--ng-model="vm.judges.gender"-->
+                    <!--/>-->
+            <select class="form-control" id="field_gender" ng-model="vm.judges.gender">
+                <OPTION Value="Male">Male</OPTION>
+                <OPTION Value="Female">Female</OPTION>
+            </select>
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="codeFestManagementSystemV1App.judges.email" for="field_email">Email</label>

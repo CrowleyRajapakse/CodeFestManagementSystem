@@ -36,6 +36,7 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="eventName"><span data-translate="codeFestManagementSystemV1App.budget.event">Event</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="food"><span data-translate="codeFestManagementSystemV1App.budget.food">Food</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="decorations"><span data-translate="codeFestManagementSystemV1App.budget.decorations">Decorations</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="prizes"><span data-translate="codeFestManagementSystemV1App.budget.prizes">Prizes</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -44,13 +45,15 @@
                     <th jh-sort-by="stationery"><span data-translate="codeFestManagementSystemV1App.budget.stationery">Stationery</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="guests"><span data-translate="codeFestManagementSystemV1App.budget.guests">Guests</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="other"><span data-translate="codeFestManagementSystemV1App.budget.other">Other</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="eventName"><span data-translate="codeFestManagementSystemV1App.budget.event">Event</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="budget in vm.budgets track by budget.id">
                     <td><a ui-sref="budget-detail({id:budget.id})">{{budget.id}}</a></td>
+                    <td>
+                        <a ui-sref="event-detail({id:budget.eventId})">{{budget.eventName}}</a>
+                    </td>
                     <td>{{budget.food}}</td>
                     <td>{{budget.decorations}}</td>
                     <td>{{budget.prizes}}</td>
@@ -59,9 +62,6 @@
                     <td>{{budget.stationery}}</td>
                     <td>{{budget.guests}}</td>
                     <td>{{budget.other}}</td>
-                    <td>
-                        <a ui-sref="event-detail({id:budget.eventId})">{{budget.eventName}}</a>
-                    </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

@@ -42,29 +42,29 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = CodeFestManagementSystemV1App.class)
 public class BudgetResourceIntTest {
 
-    private static final Double DEFAULT_FOOD = 1D;
-    private static final Double UPDATED_FOOD = 2D;
+    private static final Double DEFAULT_FOOD = 100D;
+    private static final Double UPDATED_FOOD = 200D;
 
-    private static final Double DEFAULT_DECORATIONS = 1D;
-    private static final Double UPDATED_DECORATIONS = 2D;
+    private static final Double DEFAULT_DECORATIONS = 100D;
+    private static final Double UPDATED_DECORATIONS = 200D;
 
-    private static final Double DEFAULT_PRIZES = 1D;
-    private static final Double UPDATED_PRIZES = 2D;
+    private static final Double DEFAULT_PRIZES = 100D;
+    private static final Double UPDATED_PRIZES = 200D;
 
-    private static final Double DEFAULT_PHOTOGRAPHY = 1D;
-    private static final Double UPDATED_PHOTOGRAPHY = 2D;
+    private static final Double DEFAULT_PHOTOGRAPHY = 100D;
+    private static final Double UPDATED_PHOTOGRAPHY = 200D;
 
-    private static final Double DEFAULT_TRANSPORT = 1D;
-    private static final Double UPDATED_TRANSPORT = 2D;
+    private static final Double DEFAULT_TRANSPORT = 100D;
+    private static final Double UPDATED_TRANSPORT = 200D;
 
-    private static final Double DEFAULT_STATIONERY = 1D;
-    private static final Double UPDATED_STATIONERY = 2D;
+    private static final Double DEFAULT_STATIONERY = 100D;
+    private static final Double UPDATED_STATIONERY = 200D;
 
-    private static final Double DEFAULT_GUESTS = 1D;
-    private static final Double UPDATED_GUESTS = 2D;
+    private static final Double DEFAULT_GUESTS = 100D;
+    private static final Double UPDATED_GUESTS = 200D;
 
-    private static final Double DEFAULT_OTHER = 1D;
-    private static final Double UPDATED_OTHER = 2D;
+    private static final Double DEFAULT_OTHER = 100D;
+    private static final Double UPDATED_OTHER = 200D;
 
     @Autowired
     private BudgetRepository budgetRepository;
