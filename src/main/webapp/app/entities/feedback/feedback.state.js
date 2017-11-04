@@ -92,7 +92,7 @@
             parent: 'feedback',
             url: '/new',
             data: {
-                authorities: ['ROLE_USER','ROLE_MEMBER','ROLE_LECTURER']
+                authorities: ['ROLE_USER','ROLE_MEMBER','ROLE_LECTURER','ROLE_ADMIN']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
