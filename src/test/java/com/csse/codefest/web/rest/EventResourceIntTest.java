@@ -3,6 +3,7 @@ package com.csse.codefest.web.rest;
 import com.csse.codefest.CodeFestManagementSystemV1App;
 
 import com.csse.codefest.domain.Event;
+import com.csse.codefest.domain.Competition;
 import com.csse.codefest.repository.EventRepository;
 import com.csse.codefest.service.EventService;
 import com.csse.codefest.repository.search.EventSearchRepository;
@@ -47,14 +48,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = CodeFestManagementSystemV1App.class)
 public class EventResourceIntTest {
 
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "Test Name";
+    private static final String UPDATED_NAME = "New Name";
 
-    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
-    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+    private static final String DEFAULT_DESCRIPTION = "Test Description";
+    private static final String UPDATED_DESCRIPTION = "New Description";
 
-    private static final String DEFAULT_VENUE = "AAAAAAAAAA";
-    private static final String UPDATED_VENUE = "BBBBBBBBBB";
+    private static final String DEFAULT_VENUE = "Test Venue";
+    private static final String UPDATED_VENUE = "New Venue";
 
     private static final LocalDate DEFAULT_START_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_START_DATE = LocalDate.now(ZoneId.systemDefault());
@@ -62,14 +63,17 @@ public class EventResourceIntTest {
     private static final LocalDate DEFAULT_END_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_END_DATE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final ZonedDateTime DEFAULT_ETIME = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_ETIME = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final ZonedDateTime DEFAULT_START_TIME = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_START_TIME = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
-    private static final String DEFAULT_ECOORDINATOR = "AAAAAAAAAA";
-    private static final String UPDATED_ECOORDINATOR = "BBBBBBBBBB";
+    private static final ZonedDateTime DEFAULT_END_TIME = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_END_TIME = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
-    private static final String DEFAULT_TEAM_COMPETITOR_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_TEAM_COMPETITOR_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_EVENT_COORDINATOR = "Test Coordinator";
+    private static final String UPDATED_EVENT_COORDINATOR = "New Coordiator";
+
+    private static final String DEFAULT_SPONSER_NAME = "Test Sponsor";
+    private static final String UPDATED_SPONSER_NAME = "New Sponsor";
 
     @Autowired
     private EventRepository eventRepository;
@@ -120,11 +124,17 @@ public class EventResourceIntTest {
             .name(DEFAULT_NAME)
             .description(DEFAULT_DESCRIPTION)
             .venue(DEFAULT_VENUE)
-            .startDate(DEFAULT_START_DATE)
-            .endDate(DEFAULT_END_DATE)
-            .etime(DEFAULT_ETIME)
-            .ecoordinator(DEFAULT_ECOORDINATOR)
-            .teamCompetitorName(DEFAULT_TEAM_COMPETITOR_NAME);
+            .start_Date(DEFAULT_START_DATE)
+            .end_Date(DEFAULT_END_DATE)
+            .start_time(DEFAULT_START_TIME)
+            .end_time(DEFAULT_END_TIME)
+            .event_Coordinator(DEFAULT_EVENT_COORDINATOR)
+            .sponser_Name(DEFAULT_SPONSER_NAME);
+        // Add required entity
+        Competition competition = CompetitionResourceIntTest.createEntity(em);
+        em.persist(competition);
+        em.flush();
+        event.setCompetition(competition);
         return event;
     }
 
@@ -153,11 +163,12 @@ public class EventResourceIntTest {
         assertThat(testEvent.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testEvent.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testEvent.getVenue()).isEqualTo(DEFAULT_VENUE);
-        assertThat(testEvent.getStartDate()).isEqualTo(DEFAULT_START_DATE);
-        assertThat(testEvent.getEndDate()).isEqualTo(DEFAULT_END_DATE);
-        assertThat(testEvent.getEtime()).isEqualTo(DEFAULT_ETIME);
-        assertThat(testEvent.getEcoordinator()).isEqualTo(DEFAULT_ECOORDINATOR);
-        assertThat(testEvent.getTeamCompetitorName()).isEqualTo(DEFAULT_TEAM_COMPETITOR_NAME);
+        assertThat(testEvent.getStart_Date()).isEqualTo(DEFAULT_START_DATE);
+        assertThat(testEvent.getEnd_Date()).isEqualTo(DEFAULT_END_DATE);
+        assertThat(testEvent.getStart_time()).isEqualTo(DEFAULT_START_TIME);
+        assertThat(testEvent.getEnd_time()).isEqualTo(DEFAULT_END_TIME);
+        assertThat(testEvent.getEvent_Coordinator()).isEqualTo(DEFAULT_EVENT_COORDINATOR);
+        assertThat(testEvent.getSponser_Name()).isEqualTo(DEFAULT_SPONSER_NAME);
 
         // Validate the Event in Elasticsearch
         Event eventEs = eventSearchRepository.findOne(testEvent.getId());
@@ -224,10 +235,10 @@ public class EventResourceIntTest {
 
     @Test
     @Transactional
-    public void checkEcoordinatorIsRequired() throws Exception {
+    public void checkEvent_CoordinatorIsRequired() throws Exception {
         int databaseSizeBeforeTest = eventRepository.findAll().size();
         // set the field null
-        event.setEcoordinator(null);
+        event.setEvent_Coordinator(null);
 
         // Create the Event, which fails.
         EventDTO eventDTO = eventMapper.toDto(event);
@@ -255,11 +266,12 @@ public class EventResourceIntTest {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].venue").value(hasItem(DEFAULT_VENUE.toString())))
-            .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
-            .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())))
-            .andExpect(jsonPath("$.[*].etime").value(hasItem(sameInstant(DEFAULT_ETIME))))
-            .andExpect(jsonPath("$.[*].ecoordinator").value(hasItem(DEFAULT_ECOORDINATOR.toString())))
-            .andExpect(jsonPath("$.[*].teamCompetitorName").value(hasItem(DEFAULT_TEAM_COMPETITOR_NAME.toString())));
+            .andExpect(jsonPath("$.[*].start_Date").value(hasItem(DEFAULT_START_DATE.toString())))
+            .andExpect(jsonPath("$.[*].end_Date").value(hasItem(DEFAULT_END_DATE.toString())))
+            .andExpect(jsonPath("$.[*].start_time").value(hasItem(sameInstant(DEFAULT_START_TIME))))
+            .andExpect(jsonPath("$.[*].end_time").value(hasItem(sameInstant(DEFAULT_END_TIME))))
+            .andExpect(jsonPath("$.[*].event_Coordinator").value(hasItem(DEFAULT_EVENT_COORDINATOR.toString())))
+            .andExpect(jsonPath("$.[*].sponser_Name").value(hasItem(DEFAULT_SPONSER_NAME.toString())));
     }
 
     @Test
@@ -276,11 +288,12 @@ public class EventResourceIntTest {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.venue").value(DEFAULT_VENUE.toString()))
-            .andExpect(jsonPath("$.startDate").value(DEFAULT_START_DATE.toString()))
-            .andExpect(jsonPath("$.endDate").value(DEFAULT_END_DATE.toString()))
-            .andExpect(jsonPath("$.etime").value(sameInstant(DEFAULT_ETIME)))
-            .andExpect(jsonPath("$.ecoordinator").value(DEFAULT_ECOORDINATOR.toString()))
-            .andExpect(jsonPath("$.teamCompetitorName").value(DEFAULT_TEAM_COMPETITOR_NAME.toString()));
+            .andExpect(jsonPath("$.start_Date").value(DEFAULT_START_DATE.toString()))
+            .andExpect(jsonPath("$.end_Date").value(DEFAULT_END_DATE.toString()))
+            .andExpect(jsonPath("$.start_time").value(sameInstant(DEFAULT_START_TIME)))
+            .andExpect(jsonPath("$.end_time").value(sameInstant(DEFAULT_END_TIME)))
+            .andExpect(jsonPath("$.event_Coordinator").value(DEFAULT_EVENT_COORDINATOR.toString()))
+            .andExpect(jsonPath("$.sponser_Name").value(DEFAULT_SPONSER_NAME.toString()));
     }
 
     @Test
@@ -305,11 +318,12 @@ public class EventResourceIntTest {
             .name(UPDATED_NAME)
             .description(UPDATED_DESCRIPTION)
             .venue(UPDATED_VENUE)
-            .startDate(UPDATED_START_DATE)
-            .endDate(UPDATED_END_DATE)
-            .etime(UPDATED_ETIME)
-            .ecoordinator(UPDATED_ECOORDINATOR)
-            .teamCompetitorName(UPDATED_TEAM_COMPETITOR_NAME);
+            .start_Date(UPDATED_START_DATE)
+            .end_Date(UPDATED_END_DATE)
+            .start_time(UPDATED_START_TIME)
+            .end_time(UPDATED_END_TIME)
+            .event_Coordinator(UPDATED_EVENT_COORDINATOR)
+            .sponser_Name(UPDATED_SPONSER_NAME);
         EventDTO eventDTO = eventMapper.toDto(updatedEvent);
 
         restEventMockMvc.perform(put("/api/events")
@@ -324,11 +338,12 @@ public class EventResourceIntTest {
         assertThat(testEvent.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testEvent.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testEvent.getVenue()).isEqualTo(UPDATED_VENUE);
-        assertThat(testEvent.getStartDate()).isEqualTo(UPDATED_START_DATE);
-        assertThat(testEvent.getEndDate()).isEqualTo(UPDATED_END_DATE);
-        assertThat(testEvent.getEtime()).isEqualTo(UPDATED_ETIME);
-        assertThat(testEvent.getEcoordinator()).isEqualTo(UPDATED_ECOORDINATOR);
-        assertThat(testEvent.getTeamCompetitorName()).isEqualTo(UPDATED_TEAM_COMPETITOR_NAME);
+        assertThat(testEvent.getStart_Date()).isEqualTo(UPDATED_START_DATE);
+        assertThat(testEvent.getEnd_Date()).isEqualTo(UPDATED_END_DATE);
+        assertThat(testEvent.getStart_time()).isEqualTo(UPDATED_START_TIME);
+        assertThat(testEvent.getEnd_time()).isEqualTo(UPDATED_END_TIME);
+        assertThat(testEvent.getEvent_Coordinator()).isEqualTo(UPDATED_EVENT_COORDINATOR);
+        assertThat(testEvent.getSponser_Name()).isEqualTo(UPDATED_SPONSER_NAME);
 
         // Validate the Event in Elasticsearch
         Event eventEs = eventSearchRepository.findOne(testEvent.getId());
@@ -391,11 +406,12 @@ public class EventResourceIntTest {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].venue").value(hasItem(DEFAULT_VENUE.toString())))
-            .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
-            .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())))
-            .andExpect(jsonPath("$.[*].etime").value(hasItem(sameInstant(DEFAULT_ETIME))))
-            .andExpect(jsonPath("$.[*].ecoordinator").value(hasItem(DEFAULT_ECOORDINATOR.toString())))
-            .andExpect(jsonPath("$.[*].teamCompetitorName").value(hasItem(DEFAULT_TEAM_COMPETITOR_NAME.toString())));
+            .andExpect(jsonPath("$.[*].start_Date").value(hasItem(DEFAULT_START_DATE.toString())))
+            .andExpect(jsonPath("$.[*].end_Date").value(hasItem(DEFAULT_END_DATE.toString())))
+            .andExpect(jsonPath("$.[*].start_time").value(hasItem(sameInstant(DEFAULT_START_TIME))))
+            .andExpect(jsonPath("$.[*].end_time").value(hasItem(sameInstant(DEFAULT_END_TIME))))
+            .andExpect(jsonPath("$.[*].event_Coordinator").value(hasItem(DEFAULT_EVENT_COORDINATOR.toString())))
+            .andExpect(jsonPath("$.[*].sponser_Name").value(hasItem(DEFAULT_SPONSER_NAME.toString())));
     }
 
     @Test

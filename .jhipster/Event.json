@@ -5,6 +5,9 @@
             "relationshipName": "competition",
             "otherEntityName": "competition",
             "relationshipType": "many-to-one",
+			"relationshipValidateRules": [
+                "required"
+            ],
             "otherEntityField": "title"
         }
     ],
@@ -28,26 +31,30 @@
             ]
         },
         {
-            "fieldName": "startDate",
+            "fieldName": "start_Date",
             "fieldType": "LocalDate"
         },
         {
-            "fieldName": "endDate",
+            "fieldName": "end_Date",
             "fieldType": "LocalDate"
         },
         {
-            "fieldName": "etime",
+            "fieldName": "start_time",
+            "fieldType": "ZonedDateTime"
+        },
+		{
+            "fieldName": "end_time",
             "fieldType": "ZonedDateTime"
         },
         {
-            "fieldName": "ecoordinator",
+            "fieldName": "event_Coordinator",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
             ]
         },
         {
-            "fieldName": "teamCompetitorName",
+            "fieldName": "sponser_Name",
             "fieldType": "String"
         }
     ],

@@ -42,25 +42,30 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="etime" type="timestamp">
+            <column name="start_time" type="timestamp">
                 <constraints nullable="true" />
             </column>
 
-            <column name="ecoordinator" type="varchar(255)">
+            <column name="end_time" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="event_coordinator" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
 
-            <column name="team_competitor_name" type="varchar(255)">
+            <column name="sponser_name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
             <column name="competition_id" type="bigint">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        <dropDefaultValue tableName="event" columnName="etime" columnDataType="datetime"/>
+        <dropDefaultValue tableName="event" columnName="start_time" columnDataType="datetime"/>
+        <dropDefaultValue tableName="event" columnName="end_time" columnDataType="datetime"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

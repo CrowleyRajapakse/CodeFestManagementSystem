@@ -24,16 +24,18 @@ public class EventDTO implements Serializable {
     @NotNull
     private String venue;
 
-    private LocalDate startDate;
+    private LocalDate start_Date;
 
-    private LocalDate endDate;
+    private LocalDate end_Date;
 
-    private ZonedDateTime etime;
+    private ZonedDateTime start_time;
+
+    private ZonedDateTime end_time;
 
     @NotNull
-    private String ecoordinator;
+    private String event_Coordinator;
 
-    private String teamCompetitorName;
+    private String sponser_Name;
 
     private Long competitionId;
 
@@ -71,44 +73,52 @@ public class EventDTO implements Serializable {
         this.venue = venue;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
+    public LocalDate getStart_Date() {
+        return start_Date;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+    public void setStart_Date(LocalDate start_Date) {
+        this.start_Date = start_Date;
     }
 
-    public LocalDate getEndDate() {
-        return endDate;
+    public LocalDate getEnd_Date() {
+        return end_Date;
     }
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
+    public void setEnd_Date(LocalDate end_Date) {
+        this.end_Date = end_Date;
     }
 
-    public ZonedDateTime getEtime() {
-        return etime;
+    public ZonedDateTime getStart_time() {
+        return start_time;
     }
 
-    public void setEtime(ZonedDateTime etime) {
-        this.etime = etime;
+    public void setStart_time(ZonedDateTime start_time) {
+        this.start_time = start_time;
     }
 
-    public String getEcoordinator() {
-        return ecoordinator;
+    public ZonedDateTime getEnd_time() {
+        return end_time;
     }
 
-    public void setEcoordinator(String ecoordinator) {
-        this.ecoordinator = ecoordinator;
+    public void setEnd_time(ZonedDateTime end_time) {
+        this.end_time = end_time;
     }
 
-    public String getTeamCompetitorName() {
-        return teamCompetitorName;
+    public String getEvent_Coordinator() {
+        return event_Coordinator;
     }
 
-    public void setTeamCompetitorName(String teamCompetitorName) {
-        this.teamCompetitorName = teamCompetitorName;
+    public void setEvent_Coordinator(String event_Coordinator) {
+        this.event_Coordinator = event_Coordinator;
+    }
+
+    public String getSponser_Name() {
+        return sponser_Name;
+    }
+
+    public void setSponser_Name(String sponser_Name) {
+        this.sponser_Name = sponser_Name;
     }
 
     public Long getCompetitionId() {
@@ -155,11 +165,12 @@ public class EventDTO implements Serializable {
             ", name='" + getName() + "'" +
             ", description='" + getDescription() + "'" +
             ", venue='" + getVenue() + "'" +
-            ", startDate='" + getStartDate() + "'" +
-            ", endDate='" + getEndDate() + "'" +
-            ", etime='" + getEtime() + "'" +
-            ", ecoordinator='" + getEcoordinator() + "'" +
-            ", teamCompetitorName='" + getTeamCompetitorName() + "'" +
+            ", start_Date='" + getStart_Date() + "'" +
+            ", end_Date='" + getEnd_Date() + "'" +
+            ", start_time='" + getStart_time() + "'" +
+            ", end_time='" + getEnd_time() + "'" +
+            ", event_Coordinator='" + getEvent_Coordinator() + "'" +
+            ", sponser_Name='" + getSponser_Name() + "'" +
             "}";
     }
 }

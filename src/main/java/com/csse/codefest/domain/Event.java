@@ -35,22 +35,26 @@ public class Event implements Serializable {
     private String venue;
 
     @Column(name = "start_date")
-    private LocalDate startDate;
+    private LocalDate start_Date;
 
     @Column(name = "end_date")
-    private LocalDate endDate;
+    private LocalDate end_Date;
 
-    @Column(name = "etime")
-    private ZonedDateTime etime;
+    @Column(name = "start_time")
+    private ZonedDateTime start_time;
+
+    @Column(name = "end_time")
+    private ZonedDateTime end_time;
 
     @NotNull
-    @Column(name = "ecoordinator", nullable = false)
-    private String ecoordinator;
+    @Column(name = "event_coordinator", nullable = false)
+    private String event_Coordinator;
 
-    @Column(name = "team_competitor_name")
-    private String teamCompetitorName;
+    @Column(name = "sponser_name")
+    private String sponser_Name;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @NotNull
     private Competition competition;
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
@@ -101,69 +105,82 @@ public class Event implements Serializable {
         this.venue = venue;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
+    public LocalDate getStart_Date() {
+        return start_Date;
     }
 
-    public Event startDate(LocalDate startDate) {
-        this.startDate = startDate;
+    public Event start_Date(LocalDate start_Date) {
+        this.start_Date = start_Date;
         return this;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+    public void setStart_Date(LocalDate start_Date) {
+        this.start_Date = start_Date;
     }
 
-    public LocalDate getEndDate() {
-        return endDate;
+    public LocalDate getEnd_Date() {
+        return end_Date;
     }
 
-    public Event endDate(LocalDate endDate) {
-        this.endDate = endDate;
+    public Event end_Date(LocalDate end_Date) {
+        this.end_Date = end_Date;
         return this;
     }
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
+    public void setEnd_Date(LocalDate end_Date) {
+        this.end_Date = end_Date;
     }
 
-    public ZonedDateTime getEtime() {
-        return etime;
+    public ZonedDateTime getStart_time() {
+        return start_time;
     }
 
-    public Event etime(ZonedDateTime etime) {
-        this.etime = etime;
+    public Event start_time(ZonedDateTime start_time) {
+        this.start_time = start_time;
         return this;
     }
 
-    public void setEtime(ZonedDateTime etime) {
-        this.etime = etime;
+    public void setStart_time(ZonedDateTime start_time) {
+        this.start_time = start_time;
     }
 
-    public String getEcoordinator() {
-        return ecoordinator;
+    public ZonedDateTime getEnd_time() {
+        return end_time;
     }
 
-    public Event ecoordinator(String ecoordinator) {
-        this.ecoordinator = ecoordinator;
+    public Event end_time(ZonedDateTime end_time) {
+        this.end_time = end_time;
         return this;
     }
 
-    public void setEcoordinator(String ecoordinator) {
-        this.ecoordinator = ecoordinator;
+    public void setEnd_time(ZonedDateTime end_time) {
+        this.end_time = end_time;
     }
 
-    public String getTeamCompetitorName() {
-        return teamCompetitorName;
+    public String getEvent_Coordinator() {
+        return event_Coordinator;
     }
 
-    public Event teamCompetitorName(String teamCompetitorName) {
-        this.teamCompetitorName = teamCompetitorName;
+    public Event event_Coordinator(String event_Coordinator) {
+        this.event_Coordinator = event_Coordinator;
         return this;
     }
 
-    public void setTeamCompetitorName(String teamCompetitorName) {
-        this.teamCompetitorName = teamCompetitorName;
+    public void setEvent_Coordinator(String event_Coordinator) {
+        this.event_Coordinator = event_Coordinator;
+    }
+
+    public String getSponser_Name() {
+        return sponser_Name;
+    }
+
+    public Event sponser_Name(String sponser_Name) {
+        this.sponser_Name = sponser_Name;
+        return this;
+    }
+
+    public void setSponser_Name(String sponser_Name) {
+        this.sponser_Name = sponser_Name;
     }
 
     public Competition getCompetition() {
@@ -207,11 +224,12 @@ public class Event implements Serializable {
             ", name='" + getName() + "'" +
             ", description='" + getDescription() + "'" +
             ", venue='" + getVenue() + "'" +
-            ", startDate='" + getStartDate() + "'" +
-            ", endDate='" + getEndDate() + "'" +
-            ", etime='" + getEtime() + "'" +
-            ", ecoordinator='" + getEcoordinator() + "'" +
-            ", teamCompetitorName='" + getTeamCompetitorName() + "'" +
+            ", start_Date='" + getStart_Date() + "'" +
+            ", end_Date='" + getEnd_Date() + "'" +
+            ", start_time='" + getStart_time() + "'" +
+            ", end_time='" + getEnd_time() + "'" +
+            ", event_Coordinator='" + getEvent_Coordinator() + "'" +
+            ", sponser_Name='" + getSponser_Name() + "'" +
             "}";
     }
 }

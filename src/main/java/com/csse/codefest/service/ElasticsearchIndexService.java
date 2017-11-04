@@ -27,6 +27,10 @@ public class ElasticsearchIndexService {
 
     private final ApplicationFormSearchRepository applicationFormSearchRepository;
 
+    private final BudgetRepository budgetRepository;
+
+    private final BudgetSearchRepository budgetSearchRepository;
+
     private final CompetitionRepository competitionRepository;
 
     private final CompetitionSearchRepository competitionSearchRepository;
@@ -42,6 +46,10 @@ public class ElasticsearchIndexService {
     private final FeedbackRepository feedbackRepository;
 
     private final FeedbackSearchRepository feedbackSearchRepository;
+
+    private final JudgesRepository judgesRepository;
+
+    private final JudgesSearchRepository judgesSearchRepository;
 
     private final ResulteventRepository resulteventRepository;
 
@@ -62,6 +70,8 @@ public class ElasticsearchIndexService {
         UserSearchRepository userSearchRepository,
         ApplicationFormRepository applicationFormRepository,
         ApplicationFormSearchRepository applicationFormSearchRepository,
+        BudgetRepository budgetRepository,
+        BudgetSearchRepository budgetSearchRepository,
         CompetitionRepository competitionRepository,
         CompetitionSearchRepository competitionSearchRepository,
         CompetitorRepository competitorRepository,
@@ -70,6 +80,8 @@ public class ElasticsearchIndexService {
         EventSearchRepository eventSearchRepository,
         FeedbackRepository feedbackRepository,
         FeedbackSearchRepository feedbackSearchRepository,
+        JudgesRepository judgesRepository,
+        JudgesSearchRepository judgesSearchRepository,
         ResulteventRepository resulteventRepository,
         ResulteventSearchRepository resulteventSearchRepository,
         WorkshopRepository workshopRepository,
@@ -79,6 +91,8 @@ public class ElasticsearchIndexService {
         this.userSearchRepository = userSearchRepository;
         this.applicationFormRepository = applicationFormRepository;
         this.applicationFormSearchRepository = applicationFormSearchRepository;
+        this.budgetRepository = budgetRepository;
+        this.budgetSearchRepository = budgetSearchRepository;
         this.competitionRepository = competitionRepository;
         this.competitionSearchRepository = competitionSearchRepository;
         this.competitorRepository = competitorRepository;
@@ -87,6 +101,8 @@ public class ElasticsearchIndexService {
         this.eventSearchRepository = eventSearchRepository;
         this.feedbackRepository = feedbackRepository;
         this.feedbackSearchRepository = feedbackSearchRepository;
+        this.judgesRepository = judgesRepository;
+        this.judgesSearchRepository = judgesSearchRepository;
         this.resulteventRepository = resulteventRepository;
         this.resulteventSearchRepository = resulteventSearchRepository;
         this.workshopRepository = workshopRepository;
@@ -98,10 +114,12 @@ public class ElasticsearchIndexService {
     @Timed
     public void reindexAll() {
         reindexForClass(ApplicationForm.class, applicationFormRepository, applicationFormSearchRepository);
+        reindexForClass(Budget.class, budgetRepository, budgetSearchRepository);
         reindexForClass(Competition.class, competitionRepository, competitionSearchRepository);
         reindexForClass(Competitor.class, competitorRepository, competitorSearchRepository);
         reindexForClass(Event.class, eventRepository, eventSearchRepository);
         reindexForClass(Feedback.class, feedbackRepository, feedbackSearchRepository);
+        reindexForClass(Judges.class, judgesRepository, judgesSearchRepository);
         reindexForClass(Resultevent.class, resulteventRepository, resulteventSearchRepository);
         reindexForClass(Workshop.class, workshopRepository, workshopSearchRepository);
         reindexForClass(User.class, userRepository, userSearchRepository);

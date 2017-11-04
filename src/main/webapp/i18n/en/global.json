@@ -14,6 +14,8 @@
                 "resultevent": "Resultevent",
                 "competitor": "Competitor",
                 "applicationForm": "Application Form",
+                "budget": "Budget",
+                "judges": "Judges",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

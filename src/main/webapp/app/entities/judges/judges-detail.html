@@ -1,0 +1,47 @@
+
+<div>
+    <h2><span data-translate="codeFestManagementSystemV1App.judges.detail.title">Judges</span> {{vm.judges.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="codeFestManagementSystemV1App.judges.name">Name</span></dt>
+        <dd>
+            <span>{{vm.judges.name}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.judges.gender">Gender</span></dt>
+        <dd>
+            <span>{{vm.judges.gender}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.judges.email">Email</span></dt>
+        <dd>
+            <span>{{vm.judges.email}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.judges.phone">Phone</span></dt>
+        <dd>
+            <span>{{vm.judges.phone}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.judges.job_title">Job Title</span></dt>
+        <dd>
+            <span>{{vm.judges.job_title}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.judges.employer">Employer</span></dt>
+        <dd>
+            <span>{{vm.judges.employer}}</span>
+        </dd>
+        <dt><span data-translate="codeFestManagementSystemV1App.judges.events">Events</span></dt>
+        <dd>
+            <a ui-sref="event-detail({id:vm.judges.eventsId})">{{vm.judges.eventsName}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="judges-detail.edit({id:vm.judges.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

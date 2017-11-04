@@ -115,4 +115,21 @@ public class MailService {
         String content = templateEngine.process("feedBackEmail", context);
         sendEmail(email, subject, content, false, true);
     }
+
+    @Async
+    public void sendGetDetailsMail(String name, String email, String eventsName, int age, int phone, String category) {
+        log.debug("Sending workshop/events email to '{}'", "csseproj@gmail.com");
+        Locale locale = Locale.forLanguageTag("en");
+        String subject = messageSource.getMessage("email.getDetails.title", null, locale);
+        Context context = new Context(locale);
+        context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
+        context.setVariable("name", name);
+        context.setVariable("email", email);
+        context.setVariable("eventsName", eventsName);
+        context.setVariable("age", age);
+        context.setVariable("phone", phone);
+        context.setVariable("category", category);
+        String content = templateEngine.process("getDetailsEmail", context);
+        sendEmail("csseproj@gmail.com", subject, content, false, true);
+    }
 }

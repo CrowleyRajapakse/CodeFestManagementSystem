@@ -1,0 +1,56 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "event",
+            "otherEntityName": "event",
+            "relationshipType": "one-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "name",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "food",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "decorations",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "prizes",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "photography",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "transport",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "stationery",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "guests",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "other",
+            "fieldType": "Double"
+        }
+    ],
+    "changelogDate": "20171102082846",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "budget",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

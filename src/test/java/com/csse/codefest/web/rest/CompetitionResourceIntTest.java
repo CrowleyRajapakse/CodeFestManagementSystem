@@ -46,14 +46,14 @@ public class CompetitionResourceIntTest {
     private static final String DEFAULT_TITLE = "Test Title";
     private static final String UPDATED_TITLE = "New Title";
 
-    private static final String DEFAULT_THEME = "AAAAAAAAAA";
-    private static final String UPDATED_THEME = "BBBBBBBBBB";
+    private static final String DEFAULT_THEME = "Test Theme";
+    private static final String UPDATED_THEME = "New Theme";
 
-    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
-    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+    private static final String DEFAULT_DESCRIPTION = "Test Description";
+    private static final String UPDATED_DESCRIPTION = "New Description";
 
-    private static final String DEFAULT_VENUE = "AAAAAAAAAA";
-    private static final String UPDATED_VENUE = "BBBBBBBBBB";
+    private static final String DEFAULT_VENUE = "Test Venue";
+    private static final String UPDATED_VENUE = "New Venue";
 
     private static final LocalDate DEFAULT_START_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_START_DATE = LocalDate.now(ZoneId.systemDefault());
@@ -61,17 +61,17 @@ public class CompetitionResourceIntTest {
     private static final LocalDate DEFAULT_END_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_END_DATE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final String DEFAULT_SPONSOR = "AAAAAAAAAA";
-    private static final String UPDATED_SPONSOR = "BBBBBBBBBB";
+    private static final String DEFAULT_SPONSOR = "Test Sponsor";
+    private static final String UPDATED_SPONSOR = "New Sponsor";
 
-    private static final String DEFAULT_OBJECTIVE = "AAAAAAAAAA";
-    private static final String UPDATED_OBJECTIVE = "BBBBBBBBBB";
+    private static final String DEFAULT_OBJECTIVE = "Test Objective";
+    private static final String UPDATED_OBJECTIVE = "New Objective";
 
-    private static final String DEFAULT_COORDINATOR = "AAAAAAAAAA";
-    private static final String UPDATED_COORDINATOR = "BBBBBBBBBB";
+    private static final String DEFAULT_COORDINATOR = "Test Coordinator";
+    private static final String UPDATED_COORDINATOR = "New Coordinator";
 
-    private static final String DEFAULT_ABOUT_US = "AAAAAAAAAA";
-    private static final String UPDATED_ABOUT_US = "BBBBBBBBBB";
+    private static final String DEFAULT_ABOUT_US = "Test AboutUs";
+    private static final String UPDATED_ABOUT_US = "New AboutUs";
 
     @Autowired
     private CompetitionRepository competitionRepository;

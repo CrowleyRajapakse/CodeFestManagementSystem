@@ -26,8 +26,8 @@
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
                         <span>
                             <span class="glyphicon glyphicon-th-list"></span>
-                            <span class="hidden-sm" data-translate="global.menu.entities.main">
-                                Entities
+                            <span class="hidden-sm" >
+                                Menu
                             </span>
                             <b class="caret"></b>
                         </span>
@@ -60,7 +60,7 @@
                         <li ui-sref-active="active">
                                 <a ui-sref="resultevent" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                    <span data-translate="global.menu.entities.resultevent">Results</span>
+                                    <span>Results</span>
                                 </a>
                             </li>
                         <li ui-sref-active="active">
@@ -73,6 +73,18 @@
                                 <a ui-sref="application-form" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
                                     <span data-translate="global.menu.entities.applicationForm">Application Form</span>
+                                </a>
+                            </li>
+                        <li ui-sref-active="active">
+                                <a ui-sref="budget" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                    <span data-translate="global.menu.entities.budget">Budget</span>
+                                </a>
+                            </li>
+                        <li ui-sref-active="active">
+                                <a ui-sref="judges" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                    <span data-translate="global.menu.entities.judges">Judges</span>
                                 </a>
                             </li>
                         <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
@@ -184,12 +196,6 @@
                                 <span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;
                                 <span
                                     data-translate="global.menu.admin.elasticsearch-reindex">Elasticsearch Reindex</span>
-                            </a>
-                        </li>
-                        <li ui-sref-active="active">
-                            <a ui-sref="elasticsearch-reindex" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;
-                                <span data-translate="global.menu.admin.elasticsearch-reindex">Elasticsearch Reindex</span>
                             </a>
                         </li>
                         <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->

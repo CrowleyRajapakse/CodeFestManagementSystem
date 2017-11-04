@@ -44,59 +44,74 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label" data-translate="codeFestManagementSystemV1App.event.startDate" for="field_startDate">Start Date</label>
+            <label class="control-label" data-translate="codeFestManagementSystemV1App.event.start_Date" for="field_start_Date">Start Date</label>
                 <div class="input-group">
-                    <input id="field_startDate" type="text" class="form-control" name="startDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.event.startDate" is-open="vm.datePickerOpenStatus.startDate"
+                    <input id="field_start_Date" type="text" class="form-control" name="start_Date" uib-datepicker-popup="{{dateformat}}" ng-model="vm.event.start_Date" is-open="vm.datePickerOpenStatus.start_Date"
                     />
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('startDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('start_Date')"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
                 </div>
         </div>
         <div class="form-group">
-            <label class="control-label" data-translate="codeFestManagementSystemV1App.event.endDate" for="field_endDate">End Date</label>
+            <label class="control-label" data-translate="codeFestManagementSystemV1App.event.end_Date" for="field_end_Date">End Date</label>
                 <div class="input-group">
-                    <input id="field_endDate" type="text" class="form-control" name="endDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.event.endDate" is-open="vm.datePickerOpenStatus.endDate"
+                    <input id="field_end_Date" type="text" class="form-control" name="end_Date" uib-datepicker-popup="{{dateformat}}" ng-model="vm.event.end_Date" is-open="vm.datePickerOpenStatus.end_Date"
                     />
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('endDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('end_Date')"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
                 </div>
         </div>
         <div class="form-group">
-            <label class="control-label" data-translate="codeFestManagementSystemV1App.event.etime" for="field_etime">Etime</label>
+            <label class="control-label" data-translate="codeFestManagementSystemV1App.event.start_time" for="field_start_time">Start Time</label>
                 <div class="input-group">
-                    <input id="field_etime" type="text" class="form-control" name="etime" datetime-picker="{{dateformat}}" ng-model="vm.event.etime" is-open="vm.datePickerOpenStatus.etime"
+                    <input id="field_start_time" type="text" class="form-control" name="start_time" datetime-picker="{{dateformat}}" ng-model="vm.event.start_time" is-open="vm.datePickerOpenStatus.start_time"
                     />
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('etime')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('start_time')"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
                 </div>
         </div>
         <div class="form-group">
-            <label class="control-label" data-translate="codeFestManagementSystemV1App.event.ecoordinator" for="field_ecoordinator">Ecoordinator</label>
-            <input type="text" class="form-control" name="ecoordinator" id="field_ecoordinator"
-                    ng-model="vm.event.ecoordinator"
+            <label class="control-label" data-translate="codeFestManagementSystemV1App.event.end_time" for="field_end_time">End Time</label>
+                <div class="input-group">
+                    <input id="field_end_time" type="text" class="form-control" name="end_time" datetime-picker="{{dateformat}}" ng-model="vm.event.end_time" is-open="vm.datePickerOpenStatus.end_time"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('end_time')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="codeFestManagementSystemV1App.event.event_Coordinator" for="field_event_Coordinator">Event Coordinator</label>
+            <input type="text" class="form-control" name="event_Coordinator" id="field_event_Coordinator"
+                    ng-model="vm.event.event_Coordinator"
                     required/>
-            <div ng-show="editForm.ecoordinator.$invalid">
+            <div ng-show="editForm.event_Coordinator.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.ecoordinator.$error.required" data-translate="entity.validation.required">
+                    ng-show="editForm.event_Coordinator.$error.required" data-translate="entity.validation.required">
                     This field is required.
                 </p>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label" data-translate="codeFestManagementSystemV1App.event.teamCompetitorName" for="field_teamCompetitorName">Team Competitor Name</label>
-            <input type="text" class="form-control" name="teamCompetitorName" id="field_teamCompetitorName"
-                    ng-model="vm.event.teamCompetitorName"
+            <label class="control-label" data-translate="codeFestManagementSystemV1App.event.sponser_Name" for="field_sponser_Name">Sponser Name</label>
+            <input type="text" class="form-control" name="sponser_Name" id="field_sponser_Name"
+                    ng-model="vm.event.sponser_Name"
                     />
         </div>
 
         <div class="form-group">
             <label data-translate="codeFestManagementSystemV1App.event.competition" for="field_competition">Competition</label>
-            <select class="form-control" id="field_competition" name="competition" ng-model="vm.event.competitionId" ng-options="competition.id as competition.title for competition in vm.competitions"            >
-                <option value=""></option>
+            <select class="form-control" id="field_competition" name="competition" ng-model="vm.event.competitionId" ng-options="competition.id as competition.title for competition in vm.competitions"             required>
             </select>
+        </div>
+        <div ng-show="editForm.competition.$invalid">
+            <p class="help-block"
+                ng-show="editForm.competition.$error.required" data-translate="entity.validation.required">
+                This field is required.
+            </p>
         </div>
     </div>
     <div class="modal-footer">

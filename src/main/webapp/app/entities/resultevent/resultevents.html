@@ -1,20 +1,20 @@
 <div>
-    <h2 data-translate="codeFestManagementSystemV1App.resultevent.home.title">Results</h2>
+    <h2 >Results</h2>
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary" ui-sref="resultevent.new" >
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span class="hidden-xs-down"  data-translate="codeFestManagementSystemV1App.resultevent.home.createLabel">
-                        Create new Result
+                    <span class="hidden-xs-down" >
+                        Create New Result
                     </span>
                 </button>
             </div>
             <div class="col-xs-8 no-padding-right">
                 <form name="searchForm" class="form-inline">
                     <div class="input-group pull-right" >
-                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'codeFestManagementSystemV1App.resultevent.home.search' | translate }}">
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="Search Results">
                         <span  class="input-group-btn width-min" >
                             <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
                                 <span class="glyphicon glyphicon-search"></span>
@@ -36,7 +36,7 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="eventresultName"><span data-translate="codeFestManagementSystemV1App.resultevent.eventresult">Event</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="eventresultName"><span>Event</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="winner"><span data-translate="codeFestManagementSystemV1App.resultevent.winner">Winner</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="runner_up1"><span data-translate="codeFestManagementSystemV1App.resultevent.runner_up1">Runner Up 1</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="runner_up2"><span data-translate="codeFestManagementSystemV1App.resultevent.runner_up2">Runner Up 2</span> <span class="glyphicon glyphicon-sort"></span></th>

@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/application-form?page&sort&search',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_USER','ROLE_LECTURER'],
                 pageTitle: 'codeFestManagementSystemV1App.applicationForm.home.title'
             },
             views: {
@@ -55,7 +55,7 @@
             parent: 'application-form',
             url: '/application-form/{id}',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_USER','ROLE_LECTURER'],
                 pageTitle: 'codeFestManagementSystemV1App.applicationForm.detail.title'
             },
             views: {
@@ -87,7 +87,7 @@
             parent: 'application-form-detail',
             url: '/detail/edit',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_LECTURER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -145,7 +145,7 @@
             parent: 'application-form',
             url: '/{id}/edit',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_LECTURER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -170,7 +170,7 @@
             parent: 'application-form',
             url: '/{id}/delete',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_LECTURER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
